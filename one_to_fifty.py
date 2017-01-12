@@ -1,59 +1,45 @@
 #!/usr/bin/env python
 
-def sum_multiples_of_three_and_five(limit=10):
-    total = 0
-    # for i in range(10):
-    for i in range(limit):
-        if i % 3 == 0 or i % 5 == 0:
-            total += i
-    print 'sum of multiples of three and five below %d : %d' % (limit, total)
-
-def sum_even_fibonacci_terms(limit=10):
-    total = 0
-    first = 0
-    second = 1
-    term = 0
-    while term < limit:
-        term = first + second
-        if term % 2 == 0:
-            total += term
-        first = second
-        second = term
-
-
-    print 'sum of even fibonacci terms where term < %d : %d' % (limit, total)
+import math
+from fractions import gcd
 
 def is_prime(n):
     if n <= 1:
         return False
-    elif n <= 3:
+    if n <= 3:
         return True
-    elif n % 2 == 0 or n % 3 == 0:
+
+    if is_even(n) or no_remainder(n, 3):
         return False
+
     i = 5
     while i * i <= n:
-        if n % i == 0 or n % (i + 2) == 0:
+        if no_remainder(n, i) or no_remainder(n, (i + 2)):
             return False
         i = i + 6
     return True
 
-def highest_prime_factor(number):
-    n = number
-    factors = []
-    i = 2
-    while i * i < n:
-        if n % i == 0:
-            n /= i
-        i += 1
-    print 'highest prime factor of %d : %d' % (number, n)
+assert is_prime(2)
+assert is_prime(3)
+
+def lowest_common_multiple(a, b):
+    return a * b // gcd(a, b)
+
+def no_remainder(number, divisor):
+    return number % divisor == 0
+
+def is_even(number):
+    return no_remainder(number, 2)
+
+def is_odd(number):
+    return not is_even(number)
 
 def is_palindrome(x):
     string = str(x)
     length = len(string)
     if length == 1:
         return True
-
-    if length % 2 == 0:
+    if is_even(length):
         middle = length / 2
         left = string[:middle]
         right = ''.join(reversed(string[middle:]))
@@ -61,11 +47,7 @@ def is_palindrome(x):
         middle = length // 2
         left = string[:middle]
         right = ''.join(reversed(string[middle+1:]))
-
-    # print '%d : middle : %d, left "%s", right "%s"' % (x, middle, left, right)
     return left == right
-
-
 
 assert is_palindrome(1)
 assert is_palindrome(11)
@@ -73,34 +55,57 @@ assert is_palindrome(9009)
 assert is_palindrome(333)
 assert is_palindrome(90009)
 
-def largest_palindrome_of_product(factor_digits=2):
+def print_answer(problem_number, description, answer):
+    print 'problem %03d ; %80s : %s' % (problem_number, description, answer)
+
+def problem1(limit=10):
+    total = 0
+    for i in range(limit):
+        if no_remainder(i, 3) or no_remainder(i, 5):
+            total += i
+    return total
+
+def problem2(limit=10):
+    total = 0
+    first = 0
+    second = 1
+    term = 0
+    while term < limit:
+        term = first + second
+        if is_even(term):
+            total += term
+        first = second
+        second = term
+    return total
+
+def problem3(number):
+    n = number
+    i = 2
+    while i * i < n:
+        if no_remainder(n, i):
+            n /= i
+        i += 1
+    return n
+
+def problem4(factor_digits=2):
     palindromes = []
-    for a in range(1, 10**factor_digits):
-        for b in range(1, 10**factor_digits):
+    numbers = range(1, 10**factor_digits)
+    for a in numbers:
+        for b in numbers:
             product = a * b
             if is_palindrome(product):
                 palindromes.append(product)
-                # print '%d * %d = %d' % (a, b, product)
-    print 'largest palindrome made from the product of two %d-digit numbers : %d' % (factor_digits, max(palindromes))
+    return max(palindromes)
 
-
+def problem5(limit=10):
+    return reduce(lowest_common_multiple, range(1, limit+1))
 
 def main():
-    print 'problem 1'
-    # sum_multiples_of_three_and_five(limit=10)
-    sum_multiples_of_three_and_five(limit=1000)
-
-    print 'problem 2'
-    # sum_even_fibonacci_terms(limit=10)
-    sum_even_fibonacci_terms(limit=4000000)
-
-    print 'problem 3'
-    # highest_prime_factor(13195)
-    highest_prime_factor(600851475143)
-
-    print 'problem 4'
-    # largest_palindrome_of_product(factor_digits=2)
-    largest_palindrome_of_product(factor_digits=3)
+    print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
+    print_answer(2, 'sum of even fibonacci terms where term is less than four million', problem2(limit=4000000))
+    print_answer(3, 'highest prime factor of 600851475143', problem3(600851475143))
+    print_answer(4, 'largest palindrome made from the product of two three-digit numbers', problem4(factor_digits=3))
+    print_answer(5, 'lowest number which is evenly divisible by all numbers from 1 to 20', problem5(limit=20))
 
 if __name__ == '__main__':
     main()
