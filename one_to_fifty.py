@@ -110,6 +110,15 @@ def problem6(limit=10):
     difference = sum_squares - square_sum
     return abs(difference)
 
+def problem7(n):
+    primes_found = []
+    i = 1
+    while len(primes_found) < n:
+        if is_prime(i):
+            primes_found.append(i)
+        i += 1
+    return primes_found[-1]
+
 
 def main():
     print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
@@ -118,6 +127,7 @@ def main():
     print_answer(4, 'largest palindrome made from the product of two three-digit numbers', problem4(factor_digits=3))
     print_answer(5, 'lowest number which is evenly divisible by all numbers from 1 to 20', problem5(limit=20))
     print_answer(6, 'the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum', problem6(limit=100))
+    print_answer(7, 'the 10 001st prime number', problem7(10001))
 
 if __name__ == '__main__':
     main()
