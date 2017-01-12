@@ -100,12 +100,24 @@ def problem4(factor_digits=2):
 def problem5(limit=10):
     return reduce(lowest_common_multiple, range(1, limit+1))
 
+def problem6(limit=10):
+    sum_squares = 0
+    number_sum = 0
+    for i in range(1, limit+1):
+        sum_squares += i ** 2
+        number_sum += i
+    square_sum = number_sum ** 2
+    difference = sum_squares - square_sum
+    return abs(difference)
+
+
 def main():
     print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
     print_answer(2, 'sum of even fibonacci terms where term is less than four million', problem2(limit=4000000))
     print_answer(3, 'highest prime factor of 600851475143', problem3(600851475143))
     print_answer(4, 'largest palindrome made from the product of two three-digit numbers', problem4(factor_digits=3))
     print_answer(5, 'lowest number which is evenly divisible by all numbers from 1 to 20', problem5(limit=20))
+    print_answer(6, 'the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum', problem6(limit=100))
 
 if __name__ == '__main__':
     main()
