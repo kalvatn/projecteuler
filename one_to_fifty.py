@@ -47,14 +47,41 @@ def highest_prime_factor(number):
         i += 1
     print 'highest prime factor of %d : %d' % (number, n)
 
+def is_palindrome(x):
+    string = str(x)
+    length = len(string)
+    if length == 1:
+        return True
+
+    if length % 2 == 0:
+        middle = length / 2
+        left = string[:middle]
+        right = ''.join(reversed(string[middle:]))
+    else:
+        middle = length // 2
+        left = string[:middle]
+        right = ''.join(reversed(string[middle+1:]))
+
+    # print '%d : middle : %d, left "%s", right "%s"' % (x, middle, left, right)
+    return left == right
+
+
+
+assert is_palindrome(1)
+assert is_palindrome(11)
+assert is_palindrome(9009)
+assert is_palindrome(333)
+assert is_palindrome(90009)
+
 def largest_palindrome_of_product(factor_digits=2):
-    products = []
+    palindromes = []
     for a in range(1, 10**factor_digits):
         for b in range(1, 10**factor_digits):
             product = a * b
-            print product
-            products.append(product)
-    print products
+            if is_palindrome(product):
+                palindromes.append(product)
+                # print '%d * %d = %d' % (a, b, product)
+    print 'largest palindrome made from the product of two %d-digit numbers : %d' % (factor_digits, max(palindromes))
 
 
 
@@ -72,7 +99,8 @@ def main():
     highest_prime_factor(600851475143)
 
     print 'problem 4'
-    largest_palindrome_of_product()
+    # largest_palindrome_of_product(factor_digits=2)
+    largest_palindrome_of_product(factor_digits=3)
 
 if __name__ == '__main__':
     main()
