@@ -4,6 +4,17 @@ import math
 from fractions import gcd
 from operator import mul
 
+from itertools import combinations
+
+def integer_combinations(numbers, number_of_vars, target_sum=None):
+    if target_sum is not None:
+        return [ c for c in combinations(numbers, number_of_vars) if sum(c) == target_sum ]
+    return [ c for c in combinations(numbers, number_of_vars)]
+
+assert len(integer_combinations([1,2], 2, target_sum=0)) == 0
+assert len(integer_combinations([1,2], 2, target_sum=3)) == 1
+assert len(integer_combinations([10, 2, 1, 9], 2, target_sum=11)) == 2
+
 def is_prime(n):
     if n <= 1:
         return False
@@ -133,7 +144,10 @@ def problem8(adjacent_digits=4):
             greatest_product = product
     return greatest_product
 
-
+def problem9(target_sum):
+    for a,b,c in integer_combinations(range(target_sum+1), 3, target_sum=target_sum):
+        if a**2 + b**2 == c**2:
+            return a * b * c
 
 def main():
     print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
@@ -144,6 +158,7 @@ def main():
     print_answer(6, 'the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum', problem6(limit=100))
     print_answer(7, 'the 10 001st prime number', problem7(10001))
     print_answer(8, 'value of the thirteen adjacent digits in the 1000-digit number that have the greatest product', problem8(adjacent_digits=13))
+    print_answer(9, 'product of Pythagorean triplet for which a + b + c = 1000', problem9(1000))
 
 if __name__ == '__main__':
     main()
