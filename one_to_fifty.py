@@ -6,6 +6,16 @@ from operator import mul
 
 from itertools import combinations
 
+def read_file(filename):
+    return [ line.strip() for line in open(filename) ]
+
+def convert_lines_to_number_matrix(lines):
+    return [ [ int(x) for x in line.split() ] for line in lines ]
+
+def print_number_matrix(matrix, digit_size=1):
+    for row in matrix:
+        print ' '.join([ str(x).zfill(digit_size) for x in row ])
+
 def integer_combinations(numbers, number_of_vars, target_sum=None):
     if target_sum is not None:
         return [ c for c in combinations(numbers, number_of_vars) if sum(c) == target_sum ]
@@ -158,16 +168,20 @@ def problem10(limit=10):
 
 
 def main():
-    print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
-    print_answer(2, 'sum of even fibonacci terms where term is less than four million', problem2(limit=4000000))
-    print_answer(3, 'highest prime factor of 600851475143', problem3(600851475143))
+    # print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
+    # print_answer(2, 'sum of even fibonacci terms where term is less than four million', problem2(limit=4000000))
+    # print_answer(3, 'highest prime factor of 600851475143', problem3(600851475143))
     # print_answer(4, 'largest palindrome made from the product of two three-digit numbers', problem4(factor_digits=3))
-    print_answer(5, 'lowest number which is evenly divisible by all numbers from 1 to 20', problem5(limit=20))
-    print_answer(6, 'the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum', problem6(limit=100))
-    print_answer(7, 'the 10 001st prime number', problem7(10001))
-    print_answer(8, 'value of the thirteen adjacent digits in the 1000-digit number that have the greatest product', problem8(adjacent_digits=13))
+    # print_answer(5, 'lowest number which is evenly divisible by all numbers from 1 to 20', problem5(limit=20))
+    # print_answer(6, 'the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum', problem6(limit=100))
+    # print_answer(7, 'the 10 001st prime number', problem7(10001))
+    # print_answer(8, 'value of the thirteen adjacent digits in the 1000-digit number that have the greatest product', problem8(adjacent_digits=13))
     # print_answer(9, 'product of Pythagorean triplet for which a + b + c = 1000', problem9(1000))
-    print_answer(10, 'sum of all primes below two million', problem10(limit=2000000))
+    # print_answer(10, 'sum of all primes below two million', problem10(limit=2000000))
+
+    lines = read_file('problem11_input.txt')
+    matrix = convert_lines_to_number_matrix(lines)
+    print_number_matrix(matrix, digit_size=2)
 
 if __name__ == '__main__':
     main()
