@@ -245,6 +245,32 @@ def problem11():
     return greatest_product
 
 
+
+def problem12(min_divisors):
+    import time
+    divisors = []
+    i = 1
+    n = 0
+    while len(divisors) < min_divisors:
+        n = n + i
+        divisors = []
+
+        for x in xrange(1, int(n**0.5) + 1):
+            if no_remainder(n, x):
+                divisors.append(x)
+                divisors.append(n / x)
+
+        # print n, divisors
+
+        # if i % 31 == 0:
+        #     print 'n : %d, len(divisors) : %d, %s' % (n, len(divisors), divisors)
+        i += 1
+    return n
+
+
+
+
+
 def main():
     # print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
     # print_answer(2, 'sum of even fibonacci terms where term is less than four million', problem2(limit=4000000))
@@ -257,6 +283,7 @@ def main():
     # print_answer(9, 'product of Pythagorean triplet for which a + b + c = 1000', problem9(1000))
     # print_answer(10, 'sum of all primes below two million', problem10(limit=2000000))
     print_answer(11, 'the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20x20 grid', problem11())
+    print_answer(12, 'value of the first triangle number to have over five hundred divisors', problem12(500))
 
 
 
