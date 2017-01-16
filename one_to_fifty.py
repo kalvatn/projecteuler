@@ -218,41 +218,29 @@ def problem11():
     matrix = convert_lines_to_number_matrix(lines)
 
     greatest_product = ([], 0)
-    print 'horizontal groups'
     for group in matrix_groups_horizontal(matrix, group_size=4):
         product = reduce(mul, group)
         if product > greatest_product[1]:
             greatest_product = (group, product)
         # print 'horizontal', group, product
-    print 'greatest_product horizontal %s : %d' % (greatest_product[0], greatest_product[1])
 
-    print 'vertical groups'
     for group in matrix_groups_vertical(matrix, group_size=4):
         product = reduce(mul, group)
         if product > greatest_product[1]:
             greatest_product = (group, product)
         # print 'vertical', group, product
 
-    print 'greatest_product vertical %s : %d' % (greatest_product[0], greatest_product[1])
-
-    print 'diagonal groups'
     for group in matrix_groups_diagonal_left_to_right(matrix, group_size=4):
         product = reduce(mul, group)
         if product > greatest_product[1]:
             greatest_product = (group, product)
         # print 'diagonal left-to-right', group, product
 
-    print 'greatest_product diagonal left-to-right %s : %d' % (greatest_product[0], greatest_product[1])
-
-    print 'diagonal groups'
     for group in matrix_groups_diagonal_right_to_left(matrix, group_size=4):
         product = reduce(mul, group)
         if product > greatest_product[1]:
             greatest_product = (group, product)
         # print 'diagonal left-to-right', group, product
-
-    print 'greatest_product diagonal right-to-left %s : %d' % (greatest_product[0], greatest_product[1])
-
     # print_number_matrix(matrix, digit_size=2)
     return greatest_product
 
