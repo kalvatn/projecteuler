@@ -272,6 +272,26 @@ def problem13():
 
 
 
+def collatz_sequence(n, seq=[]):
+    seq.append(n)
+    if n == 1:
+        return seq
+    if is_even(n):
+        return collatz_sequence(n/2, seq)
+    return collatz_sequence(n * 3 + 1, seq)
+
+# print collatz_sequence(13)
+
+def problem14():
+    longest_sequence = []
+    for i in range(1, 1000000):
+        seq = collatz_sequence(i, seq=[])
+        if len(seq) > len(longest_sequence):
+            longest_sequence = seq
+            # print 'new longest %d : %d' % (seq[0], len(seq))
+    return (longest_sequence[0], len(longest_sequence))
+
+
 
 
 def main():
@@ -287,7 +307,9 @@ def main():
     # print_answer(10, 'sum of all primes below two million', problem10(limit=2000000))
     # print_answer(11, 'the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20x20 grid', problem11())
     # print_answer(12, 'value of the first triangle number to have over five hundred divisors', problem12(500))
-    print_answer(13, 'first ten digits of the sum of the 50 one-hundred digit numbers (problem13_input.txt)', problem13())
+    # print_answer(13, 'first ten digits of the sum of the 50 one-hundred digit numbers (problem13_input.txt)', problem13())
+    print_answer(14, 'starting number, under one million, produces the longest collatz chain', problem14())
+    pass
 
 
 
