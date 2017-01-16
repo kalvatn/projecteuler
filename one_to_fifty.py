@@ -298,6 +298,10 @@ def problem15(grid_size):
     return binomial_coefficient(2 * grid_size, grid_size)
 
 
+def problem16():
+    number = 2**1000
+    return sum( [ int(c) for c in str(number) ] )
+
 
 
 def main():
@@ -315,7 +319,8 @@ def main():
     # print_answer(12, 'value of the first triangle number to have over five hundred divisors', problem12(500))
     # print_answer(13, 'first ten digits of the sum of the 50 one-hundred digit numbers (problem13_input.txt)', problem13())
     # print_answer(14, 'starting number, under one million, produces the longest collatz chain', problem14())
-    print_answer(15, 'number of paths through a 20x20 grid only moving right and down', problem15(20))
+    # print_answer(15, 'number of paths through a 20x20 grid only moving right and down', problem15(20))
+    print_answer(16, 'What is the sum of the digits of the number 2**1000', problem16())
     pass
 
 
