@@ -166,6 +166,96 @@ def problem10(limit=10):
             total += i
     return total
 
+def matrix_groups_horizontal(matrix, group_size=2):
+    groups = []
+
+    length = len(matrix)
+    for i in range(length):
+        row = matrix[i]
+        for j in range(length-(group_size-1)):
+            groups.append(row[j:j+group_size])
+    return groups
+
+def matrix_groups_vertical(matrix, group_size=2):
+    groups = []
+
+    length = len(matrix)
+    for i in range(length):
+        for j in range(length-(group_size-1)):
+            col = []
+            for k in range(j, j+group_size):
+                col.append(matrix[k][i])
+            groups.append(col)
+    return groups
+
+def matrix_groups_diagonal_left_to_right(matrix, group_size=2):
+    groups = []
+    length = len(matrix)
+    for i in range(length-(group_size-1)):
+        for j in range(length-(group_size-1)):
+            group = []
+            for k in range(group_size):
+                group.append(matrix[j+k][i+k])
+            groups.append(group)
+    return groups
+
+def matrix_groups_diagonal_right_to_left(matrix, group_size=2):
+    groups = []
+    length = len(matrix)
+    for i in range(length-1, group_size-2, -1):
+        for j in range(length-(group_size-1)):
+            group = []
+            for k in range(group_size):
+                group.append(matrix[i-k][j+k])
+            groups.append(group)
+    return groups
+
+
+
+def problem11():
+    lines = read_file('problem11_input.txt')
+    # lines = read_file('problem11_test_input.txt')
+    matrix = convert_lines_to_number_matrix(lines)
+
+    greatest_product = ([], 0)
+    print 'horizontal groups'
+    for group in matrix_groups_horizontal(matrix, group_size=4):
+        product = reduce(mul, group)
+        if product > greatest_product[1]:
+            greatest_product = (group, product)
+        # print 'horizontal', group, product
+    print 'greatest_product horizontal %s : %d' % (greatest_product[0], greatest_product[1])
+
+    print 'vertical groups'
+    for group in matrix_groups_vertical(matrix, group_size=4):
+        product = reduce(mul, group)
+        if product > greatest_product[1]:
+            greatest_product = (group, product)
+        # print 'vertical', group, product
+
+    print 'greatest_product vertical %s : %d' % (greatest_product[0], greatest_product[1])
+
+    print 'diagonal groups'
+    for group in matrix_groups_diagonal_left_to_right(matrix, group_size=4):
+        product = reduce(mul, group)
+        if product > greatest_product[1]:
+            greatest_product = (group, product)
+        # print 'diagonal left-to-right', group, product
+
+    print 'greatest_product diagonal left-to-right %s : %d' % (greatest_product[0], greatest_product[1])
+
+    print 'diagonal groups'
+    for group in matrix_groups_diagonal_right_to_left(matrix, group_size=4):
+        product = reduce(mul, group)
+        if product > greatest_product[1]:
+            greatest_product = (group, product)
+        # print 'diagonal left-to-right', group, product
+
+    print 'greatest_product diagonal right-to-left %s : %d' % (greatest_product[0], greatest_product[1])
+
+    # print_number_matrix(matrix, digit_size=2)
+    return greatest_product
+
 
 def main():
     # print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
@@ -178,10 +268,9 @@ def main():
     # print_answer(8, 'value of the thirteen adjacent digits in the 1000-digit number that have the greatest product', problem8(adjacent_digits=13))
     # print_answer(9, 'product of Pythagorean triplet for which a + b + c = 1000', problem9(1000))
     # print_answer(10, 'sum of all primes below two million', problem10(limit=2000000))
+    print_answer(11, 'the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20x20 grid', problem11())
 
-    lines = read_file('problem11_input.txt')
-    matrix = convert_lines_to_number_matrix(lines)
-    print_number_matrix(matrix, digit_size=2)
+
 
 if __name__ == '__main__':
     main()
