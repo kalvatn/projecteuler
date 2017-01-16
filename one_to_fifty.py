@@ -291,6 +291,12 @@ def problem14():
             # print 'new longest %d : %d' % (seq[0], len(seq))
     return (longest_sequence[0], len(longest_sequence))
 
+def binomial_coefficient(n, k):
+    return math.factorial(n) // (math.factorial(k) * math.factorial(n - k))
+
+def problem15(grid_size):
+    return binomial_coefficient(2 * grid_size, grid_size)
+
 
 
 
@@ -308,7 +314,8 @@ def main():
     # print_answer(11, 'the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20x20 grid', problem11())
     # print_answer(12, 'value of the first triangle number to have over five hundred divisors', problem12(500))
     # print_answer(13, 'first ten digits of the sum of the 50 one-hundred digit numbers (problem13_input.txt)', problem13())
-    print_answer(14, 'starting number, under one million, produces the longest collatz chain', problem14())
+    # print_answer(14, 'starting number, under one million, produces the longest collatz chain', problem14())
+    print_answer(15, 'number of paths through a 20x20 grid only moving right and down', problem15(20))
     pass
 
 
