@@ -78,7 +78,7 @@ assert is_palindrome(333)
 assert is_palindrome(90009)
 
 def print_answer(problem_number, description, answer):
-    print 'problem %03d ; %80s : %s' % (problem_number, description, answer)
+    print 'problem %03d ; %150s : %s' % (problem_number, description, answer)
 
 def problem1(limit=10):
     total = 0
@@ -272,16 +272,16 @@ def problem12(min_divisors):
 
 
 def main():
-    # print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
-    # print_answer(2, 'sum of even fibonacci terms where term is less than four million', problem2(limit=4000000))
-    # print_answer(3, 'highest prime factor of 600851475143', problem3(600851475143))
-    # print_answer(4, 'largest palindrome made from the product of two three-digit numbers', problem4(factor_digits=3))
-    # print_answer(5, 'lowest number which is evenly divisible by all numbers from 1 to 20', problem5(limit=20))
-    # print_answer(6, 'the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum', problem6(limit=100))
-    # print_answer(7, 'the 10 001st prime number', problem7(10001))
-    # print_answer(8, 'value of the thirteen adjacent digits in the 1000-digit number that have the greatest product', problem8(adjacent_digits=13))
-    # print_answer(9, 'product of Pythagorean triplet for which a + b + c = 1000', problem9(1000))
-    # print_answer(10, 'sum of all primes below two million', problem10(limit=2000000))
+    print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
+    print_answer(2, 'sum of even fibonacci terms where term is less than four million', problem2(limit=4000000))
+    print_answer(3, 'highest prime factor of 600851475143', problem3(600851475143))
+    print_answer(4, 'largest palindrome made from the product of two three-digit numbers', problem4(factor_digits=3))
+    print_answer(5, 'lowest number which is evenly divisible by all numbers from 1 to 20', problem5(limit=20))
+    print_answer(6, 'the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum', problem6(limit=100))
+    print_answer(7, 'the 10 001st prime number', problem7(10001))
+    print_answer(8, 'value of the thirteen adjacent digits in the 1000-digit number that have the greatest product', problem8(adjacent_digits=13))
+    print_answer(9, 'product of Pythagorean triplet for which a + b + c = 1000', problem9(1000))
+    print_answer(10, 'sum of all primes below two million', problem10(limit=2000000))
     print_answer(11, 'the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20x20 grid', problem11())
     print_answer(12, 'value of the first triangle number to have over five hundred divisors', problem12(500))
 
