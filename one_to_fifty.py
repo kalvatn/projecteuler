@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import re
 import math
 import time
 
@@ -366,8 +367,23 @@ assert number_to_words(999333142) == 'nine hundred and ninety-nine million three
 assert number_to_words(1999333142) == 'one billion nine hundred and ninety-nine million three hundred and thirty-three thousand one hundred and forty-two'
 
 
-def problem17():
-    pass
+def count_letters(s):
+    return len(re.sub('[\W]', '', s))
+
+
+def problem17(limit=1000):
+    total_letters = 0
+    for i in range(1, limit+1):
+        number_as_words = number_to_words(i)
+        letter_count = count_letters(number_as_words)
+        total_letters += letter_count
+        # print '%04d - %35s (%02d) - %5d' % (i, number_as_words, letter_count, total_letters)
+    return total_letters
+
+assert problem17(limit=5) == 19
+
+assert count_letters(number_to_words(342)) == 23
+assert count_letters(number_to_words(115)) == 20
 
 
 def main():
