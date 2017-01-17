@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import math
+import time
+
 from fractions import gcd
 from operator import mul
 
@@ -303,6 +305,70 @@ def problem16():
     return sum( [ int(c) for c in str(number) ] )
 
 
+number_words = {
+    10 : [ 'zero', 'one' 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten' ],
+    99 : [ 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety' ],
+    10**2 : 'hundred',
+    10**3 : 'thousand',
+    10**4 : 'million',
+    10**5 : 'billion'
+}
+
+def number_to_words(n):
+    below_ten       = [ 'zero', 'one',    'two',    'three',    'four',     'five',     'six',     'seven',     'eight',    'nine' ]
+    below_twenty    = [ 'ten',  'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',  'sixteen', 'seventeen', 'eighteen', 'nineteen' ]
+    tens            = [                   'twenty', 'thirty',   'forty',   'fifty',    'sixty',   'seventy',   'eighty',   'ninety' ]
+
+    scale       = [ 10**2,      10**3,      10**6,      10**9,      10**12,     10**15,         10**18,         10**21,         10**24 ]
+    scale_short = [ 'hundred',  'thousand', 'million',  'billion',  'trillion', 'quadrillion',  'quintillion',  'sextillion',   'septillion' ]
+    scale_long  = [ 'hundred',  'thousand', 'million',  'milliard', 'billion',  'billiard',     'trillion',     'trilliard',    'quadrillion' ]
+    if n < 10:
+        return below_ten[n]
+    if n < 20:
+        quot, remainder = divmod(n, 10)
+        return below_twenty[remainder]
+    if n < 100:
+        quot, remainder = divmod(n, 10)
+        if remainder == 0:
+            number_string = tens[quot-2]
+        else:
+            number_string = '%s-%s' % (tens[quot-2], number_to_words(remainder))
+        return number_string
+
+    for i in range(len(scale)-1, 0, -1):
+        scale_number = scale[i-1]
+        if n < scale_number:
+            continue
+        quot, remainder = divmod(n, scale_number)
+        scale_unit_name = scale_short[i-1]
+        number_string = '%s %s' % (number_to_words(quot), scale_unit_name)
+        if remainder > 0:
+            if scale_number == 100:
+                number_string += ' and'
+            number_string += ' ' + number_to_words(remainder)
+        # print number_string
+        return number_string
+    return None
+
+assert number_to_words(44) == 'forty-four'
+assert number_to_words(56) == 'fifty-six'
+assert number_to_words(99) == 'ninety-nine'
+assert number_to_words(101) == 'one hundred and one'
+assert number_to_words(142) == 'one hundred and forty-two'
+assert number_to_words(2142) == 'two thousand one hundred and forty-two'
+assert number_to_words(3333) == 'three thousand three hundred and thirty-three'
+assert number_to_words(33142) == 'thirty-three thousand one hundred and forty-two'
+assert number_to_words(333142) == 'three hundred and thirty-three thousand one hundred and forty-two'
+assert number_to_words(333142) == 'three hundred and thirty-three thousand one hundred and forty-two'
+assert number_to_words(5333142) == 'five million three hundred and thirty-three thousand one hundred and forty-two'
+assert number_to_words(50333142) == 'fifty million three hundred and thirty-three thousand one hundred and forty-two'
+assert number_to_words(999333142) == 'nine hundred and ninety-nine million three hundred and thirty-three thousand one hundred and forty-two'
+assert number_to_words(1999333142) == 'one billion nine hundred and ninety-nine million three hundred and thirty-three thousand one hundred and forty-two'
+
+
+def problem17():
+    pass
+
 
 def main():
     # print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
@@ -320,7 +386,8 @@ def main():
     # print_answer(13, 'first ten digits of the sum of the 50 one-hundred digit numbers (problem13_input.txt)', problem13())
     # print_answer(14, 'starting number, under one million, produces the longest collatz chain', problem14())
     # print_answer(15, 'number of paths through a 20x20 grid only moving right and down', problem15(20))
-    print_answer(16, 'What is the sum of the digits of the number 2**1000', problem16())
+    # print_answer(16, 'What is the sum of the digits of the number 2**1000', problem16())
+    print_answer(17, 'If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?', problem17())
     pass
 
 
