@@ -385,6 +385,15 @@ assert problem17(limit=5) == 19
 assert count_letters(number_to_words(342)) == 23
 assert count_letters(number_to_words(115)) == 20
 
+def problem18():
+    # lines = read_file('problem18_input.txt')
+    lines = read_file('problem18_test_input.txt')
+    matrix = convert_lines_to_number_matrix(lines)
+    # print_number_matrix(matrix, digit_size=2)
+    i = len(matrix) * 2
+    for line in lines:
+        print (i-len(line)/2) * ' ' + line
+
 
 def main():
     # print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
@@ -403,7 +412,8 @@ def main():
     # print_answer(14, 'starting number, under one million, produces the longest collatz chain', problem14())
     # print_answer(15, 'number of paths through a 20x20 grid only moving right and down', problem15(20))
     # print_answer(16, 'What is the sum of the digits of the number 2**1000', problem16())
-    print_answer(17, 'If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?', problem17())
+    # print_answer(17, 'If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?', problem17())
+    print_answer(18, 'Find the maximum total from top to bottom of the triangle below', problem18())
     pass
 
 
