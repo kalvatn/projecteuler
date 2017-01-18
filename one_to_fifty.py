@@ -386,6 +386,60 @@ assert count_letters(number_to_words(342)) == 23
 assert count_letters(number_to_words(115)) == 20
 
 
+class Node(object):
+    def __init__(self, x, y, value, left=None, right=None):
+        self.x = x
+        self.y = y
+        self.value = value
+        self.left = left
+        self.right = right
+
+    def children(self):
+        if self.left and self.right:
+            return [ self.left, self.right]
+        return []
+
+    def __str__(self):
+        return '[%d][%d] : %d' % (self.x, self.y, self.value)
+
+    def __repr__(self):
+        return str(self)
+
+def problem18():
+    lines = read_file('problem18_input.txt')
+    # lines = read_file('problem18_test_input.txt')
+    matrix = convert_lines_to_number_matrix(lines)
+    # i = len(matrix) * 2
+    # for line in lines:
+    #     print (i-len(line)/2) * ' ' + line
+
+    nodes = [ [ Node(x, y, matrix[y][x]) for x in range(len(matrix[y])) ] for y in range(len(matrix)) ]
+
+    for y in range(len(matrix)):
+        for x in range(len(matrix[y])):
+            node = nodes[y][x]
+            if y < len(matrix)-1:
+                node.left = nodes[y+1][x]
+                node.right = nodes[y+1][x+1]
+            nodes.append(node)
+
+    def get_sum_of_node(node):
+        if node.left and node.right:
+            left_sum = get_sum_of_node(node.left)
+            right_sum = get_sum_of_node(node.right)
+
+            if left_sum > right_sum:
+                return node.value + left_sum
+            return node.value + right_sum
+        else:
+            return node.value
+    return get_sum_of_node(nodes[0][0])
+
+
+
+
+
+
 def main():
     # print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
     # print_answer(2, 'sum of even fibonacci terms where term is less than four million', problem2(limit=4000000))
@@ -403,8 +457,8 @@ def main():
     # print_answer(14, 'starting number, under one million, produces the longest collatz chain', problem14())
     # print_answer(15, 'number of paths through a 20x20 grid only moving right and down', problem15(20))
     # print_answer(16, 'What is the sum of the digits of the number 2**1000', problem16())
-    print_answer(17, 'If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?', problem17())
-    pass
+    # print_answer(17, 'If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?', problem17())
+    print_answer(18, 'Find the maximum total from top to bottom of the triangle below', problem18())
 
 
 
