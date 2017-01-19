@@ -562,6 +562,18 @@ def problem21(limit=10000):
                     amicable_numbers.add(b)
     return sum(amicable_numbers)
 
+def problem22():
+    from string import ascii_lowercase as alphabet
+    lines = [ re.sub('"', '', line).lower() for line in sorted(read_file(filename='problem22_input.txt')[0].split(','))]
+    total = 0
+    for i in range(0, len(lines)):
+        name = lines[i]
+        name_score = sum([ (alphabet.index(c)+1) for c in name ])
+        total += name_score * (i+1)
+        # print name, pos, name_score, name_score * pos
+    return total
+
+
 def main():
     # print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
     # print_answer(2, 'sum of even fibonacci terms where term is less than four million', problem2(limit=4000000))
@@ -584,7 +596,8 @@ def main():
     # print_answer(18, 'Find the maximum total from top to bottom of the triangle below', problem18())
     # print_answer(19, 'How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?', problem19())
     # print_answer(20, 'Find the sum of the digits in the number 100! (factorial)', problem20())
-    print_answer(21, 'Evaluate the sum of all the amicable numbers under 10000.', problem21())
+    # print_answer(21, 'Evaluate the sum of all the amicable numbers under 10000.', problem21())
+    print_answer(22, 'What is the total of all the name scores in the file?', problem22())
 
 
 
