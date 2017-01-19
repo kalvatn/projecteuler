@@ -524,7 +524,16 @@ def problem19():
     return count_sundays
 
 
+def problem20(number=100):
+    factorial_sum = 1
+    for i in range(number, 1, -1):
+        factorial_sum *= i
+    digit_sum = 0
+    for c in str(factorial_sum):
+        digit_sum += int(c)
+    return digit_sum
 
+assert problem20(number=10) == 27
 
 def main():
     # print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
@@ -546,7 +555,8 @@ def main():
     # print_answer(17, 'If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?', problem17())
     # print_answer(18, 'Find the maximum total from top to bottom of the triangle below', problem18())
     # print_answer(18, 'Find the maximum total from top to bottom of the triangle below', problem18())
-    print_answer(19, 'How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?', problem19())
+    # print_answer(19, 'How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?', problem19())
+    print_answer(20, 'Find the sum of the digits in the number 100! (factorial)', problem20())
 
 
 
