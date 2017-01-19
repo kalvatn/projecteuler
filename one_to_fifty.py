@@ -250,7 +250,6 @@ def problem11():
 
 
 def problem12(min_divisors):
-    import time
     divisors = []
     i = 1
     n = 0
@@ -438,6 +437,91 @@ def problem18():
     return sum([ n.value for n in path ]), [ n.value for n in path ]
 
 
+def ordinal_number_suffix(number):
+    if number < 10 or number > 20:
+        number_string = str(number)
+        if number_string.endswith('1'):
+            return 'st'
+        if number_string.endswith('2'):
+            return 'nd'
+        if number_string.endswith('3'):
+            return 'rd'
+    return 'th'
+
+def problem19():
+    months = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ]
+    days = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ]
+
+    def is_leap(year):
+        if no_remainder(year, 4):
+            if no_remainder(year, 100):
+                if no_remainder(year, 400):
+                    return True
+                else:
+                    return False
+            else:
+                return True
+        return False
+
+    def increment_yy_mm_dd(year, month, day_of_month, week, day_of_week, day_of_year):
+        new_year = year
+        new_month = month
+        new_week = week
+        new_day_of_week = day_of_week + 1
+        new_day_of_month = day_of_month + 1
+        new_day_of_year = day_of_year + 1
+        if month == 2:
+            if is_leap(year):
+                if no_remainder(day_of_month, 29):
+                    new_day_of_month = 1
+                    new_month += 1
+            elif no_remainder(day_of_month, 28):
+                new_day_of_month = 1
+                new_month += 1
+        else:
+            if month in (4, 6, 9, 11) and no_remainder(day_of_month, 30):
+                new_day_of_month = 1
+                new_month += 1
+            elif no_remainder(day_of_month, 31):
+                new_day_of_month = 1
+                new_month += 1
+
+
+        if no_remainder(new_day_of_week, len(days)+1):
+            new_day_of_week = 1
+            new_week += 1
+            new_day_of_week = 1
+        if no_remainder(new_month, len(months)+1):
+            new_month = 1
+            new_year += 1
+            new_day_of_year = 1
+            new_week = 1
+
+        return new_year, new_month, new_day_of_month, new_week, new_day_of_week, new_day_of_year
+
+    assert increment_yy_mm_dd(1901, 1, 1, 1, 1, 1) == (1901, 1, 2, 1, 2, 2)
+    assert increment_yy_mm_dd(1901, 1, 2, 1, 2, 2) == (1901, 1, 3, 1, 3, 3)
+    assert increment_yy_mm_dd(1901, 1, 3, 1, 3, 3) == (1901, 1, 4, 1, 4, 4)
+    assert increment_yy_mm_dd(1901, 1, 4, 1, 4, 4) == (1901, 1, 5, 1, 5, 5)
+    assert increment_yy_mm_dd(1901, 1, 5, 1, 5, 5) == (1901, 1, 6, 1, 6, 6)
+    assert increment_yy_mm_dd(1901, 1, 6, 1, 6, 6) == (1901, 1, 7, 1, 7, 7)
+    assert increment_yy_mm_dd(1901, 1, 7, 1, 7, 7) == (1901, 1, 8, 2, 1, 8)
+    assert increment_yy_mm_dd(1901, 12, 31, 52, 7, 365) == (1902, 1, 1, 1, 1, 1)
+
+    count_sundays = 0
+    year, month, day_of_month, week, day_of_week, day_of_year = increment_yy_mm_dd(1899, 12, 31, 52, 7, 365)
+
+    # print '%4d-%02d-%02d, %10s, %10s %2d%s, week %2d, day of year : %d' % (year, month, day_of_month, days[day_of_week-1], months[month-1], day_of_month, ordinal_number_suffix(day_of_month), week, day_of_year)
+    while year <= 2000:
+        year, month, day_of_month, week, day_of_week, day_of_year = increment_yy_mm_dd(year, month, day_of_month, week, day_of_week, day_of_year)
+        # print '%4d-%02d-%02d, %10s, %10s %2d%s, week %2d, day of year : %d' % (year, month, day_of_month, days[day_of_week-1], months[month-1], day_of_month, ordinal_number_suffix(day_of_month), week, day_of_year)
+        if day_of_week == 7:
+            if day_of_month == 1 and 1901 <= year < 2001:
+                count_sundays += 1
+                # print 'number of sundays at the first of every month : %d' % count_sundays
+        # time.sleep(0.5)
+
+    return count_sundays
 
 
 
@@ -461,7 +545,8 @@ def main():
     # print_answer(16, 'What is the sum of the digits of the number 2**1000', problem16())
     # print_answer(17, 'If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?', problem17())
     # print_answer(18, 'Find the maximum total from top to bottom of the triangle below', problem18())
-    print_answer(18, 'Find the maximum total from top to bottom of the triangle below', problem18())
+    # print_answer(18, 'Find the maximum total from top to bottom of the triangle below', problem18())
+    print_answer(19, 'How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?', problem19())
 
 
 
