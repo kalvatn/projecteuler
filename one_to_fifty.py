@@ -91,6 +91,7 @@ def problem1(limit=10):
             total += i
     return total
 
+
 def problem2(limit=10):
     total = 0
     first = 0
@@ -621,6 +622,20 @@ def problem24():
     return ''.join(str(n) for n in perms[1000000-1])
 
 
+def problem25(limit=1000):
+    first = 0
+    second = 1
+    term = 0
+    i = 1
+    # print i, 1
+    while len(str(term)) < limit:
+        i += 1
+        term = first + second
+        first = second
+        second = term
+        # print i, term
+    return i
+
 def main():
     # print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
     # print_answer(2, 'sum of even fibonacci terms where term is less than four million', problem2(limit=4000000))
@@ -646,7 +661,8 @@ def main():
     # print_answer(21, 'Evaluate the sum of all the amicable numbers under 10000.', problem21())
     # print_answer(22, 'What is the total of all the name scores in the file?', problem22())
     # print_answer(23, 'Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.', problem23())
-    print_answer(24, 'What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?', problem24())
+    # print_answer(24, 'What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?', problem24())
+    print_answer(25, 'What is the index of the first term in the Fibonacci sequence to contain 1000 digits?', problem25())
 
 
 
