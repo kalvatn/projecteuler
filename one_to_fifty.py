@@ -334,7 +334,7 @@ def main():
     print_answer(1, 'sum of multiples of three and five below one thousand')
     print_answer(2, 'sum of even fibonacci terms where term is less than four million')
     print_answer(3, 'highest prime factor of 600851475143')
-    print_answer(4, 'largest palindrome made from the product of two three-digit numbers')
+    # print_answer(4, 'largest palindrome made from the product of two three-digit numbers') # SLOW
     print_answer(5, 'lowest number which is evenly divisible by all numbers from 1 to 20')
     print_answer(6, 'the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum')
     print_answer(7, 'the 10 001st prime number')
@@ -354,7 +354,7 @@ def main():
     print_answer(20, 'Find the sum of the digits in the number 100! (factorial)')
     # print_answer(21, 'Evaluate the sum of all the amicable numbers under 10000.') # SLOW
     print_answer(22, 'What is the total of all the name scores in the file?')
-    print_answer(23, 'Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.')
+    # print_answer(23, 'Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.') # SLOW
     print_answer(24, 'What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?')
     print_answer(25, 'What is the index of the first term in the Fibonacci sequence to contain 1000 digits?')
 
