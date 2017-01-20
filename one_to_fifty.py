@@ -17,7 +17,7 @@ from string import ascii_lowercase as alphabet
 
 
 
-def problem1(limit=10):
+def problem1(limit=1000):
     total = 0
     for i in range(limit):
         if euler.no_remainder(i, 3) or euler.no_remainder(i, 5):
@@ -25,7 +25,7 @@ def problem1(limit=10):
     return total
 
 
-def problem2(limit=10):
+def problem2(limit=4000000):
     total = 0
     first = 0
     second = 1
@@ -38,7 +38,7 @@ def problem2(limit=10):
         second = term
     return total
 
-def problem3(number):
+def problem3(number=600851475143):
     n = number
     i = 2
     while i * i < n:
@@ -47,7 +47,7 @@ def problem3(number):
         i += 1
     return n
 
-def problem4(factor_digits=2):
+def problem4(factor_digits=3):
     palindromes = []
     numbers = range(1, 10**factor_digits)
     for a in numbers:
@@ -57,10 +57,10 @@ def problem4(factor_digits=2):
                 palindromes.append(product)
     return max(palindromes)
 
-def problem5(limit=10):
+def problem5(limit=20):
     return reduce(euler.lowest_common_multiple, range(1, limit+1))
 
-def problem6(limit=10):
+def problem6(limit=100):
     sum_squares = 0
     number_sum = 0
     for i in range(1, limit+1):
@@ -70,7 +70,7 @@ def problem6(limit=10):
     difference = sum_squares - square_sum
     return abs(difference)
 
-def problem7(n):
+def problem7(n=10001):
     primes_found = []
     i = 1
     while len(primes_found) < n:
@@ -79,7 +79,7 @@ def problem7(n):
         i += 1
     return primes_found[-1]
 
-def problem8(adjacent_digits=4):
+def problem8(adjacent_digits=13):
     number = int(util.read_file(filename='problem08_input.txt')[0])
     # number = 12345678901234567890
     number_str = str(number)
@@ -92,12 +92,12 @@ def problem8(adjacent_digits=4):
             greatest_product = product
     return greatest_product
 
-def problem9(target_sum):
+def problem9(target_sum=1000):
     for a,b,c in euler.integer_combinations(range(target_sum+1), 3, target_sum=target_sum):
         if a**2 + b**2 == c**2:
             return a * b * c
 
-def problem10(limit=10):
+def problem10(limit=2000000):
     total = 0
     for i in range(limit):
         if euler.is_prime(i):
@@ -136,7 +136,7 @@ def problem11():
     # print_number_matrix(matrix, digit_size=2)
     return greatest_product
 
-def problem12(min_divisors):
+def problem12(min_divisors=500):
     divisors = []
     i = 1
     n = 0
@@ -168,7 +168,7 @@ def problem14():
             # print 'new longest %d : %d' % (seq[0], len(seq))
     return (longest_sequence[0], len(longest_sequence))
 
-def problem15(grid_size):
+def problem15(grid_size=20):
     return euler.binomial_coefficient(2 * grid_size, grid_size)
 
 def problem16():
@@ -323,36 +323,40 @@ def problem25(limit=1000):
     return i
 
 
-def print_answer(problem_number, description, answer):
-    print 'problem %03d ; %150s : %s' % (problem_number, description, answer)
+def print_answer(problem_number, description):
+    start = time.time()
+    answer = globals()['problem%d' % (problem_number)]()
+    elapsed = time.time() - start
+
+    print 'problem %03d ; %125s : %30s (%ds)' % (problem_number, description, answer, elapsed)
 
 def main():
-    # print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
-    # print_answer(2, 'sum of even fibonacci terms where term is less than four million', problem2(limit=4000000))
-    # print_answer(3, 'highest prime factor of 600851475143', problem3(600851475143))
-    # print_answer(4, 'largest palindrome made from the product of two three-digit numbers', problem4(factor_digits=3))
-    # print_answer(5, 'lowest number which is evenly divisible by all numbers from 1 to 20', problem5(limit=20))
-    # print_answer(6, 'the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum', problem6(limit=100))
-    # print_answer(7, 'the 10 001st prime number', problem7(10001))
-    # print_answer(8, 'value of the thirteen adjacent digits in the 1000-digit number that have the greatest product', problem8(adjacent_digits=13))
-    # print_answer(9, 'product of Pythagorean triplet for which a + b + c = 1000', problem9(1000))
-    # print_answer(10, 'sum of all primes below two million', problem10(limit=2000000))
-    # print_answer(11, 'the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20x20 grid', problem11())
-    # print_answer(12, 'value of the first triangle number to have over five hundred divisors', problem12(500))
-    # print_answer(13, 'first ten digits of the sum of the 50 one-hundred digit numbers (problem13_input.txt)', problem13())
-    # print_answer(14, 'starting number, under one million, produces the longest collatz chain', problem14())
-    # print_answer(15, 'number of paths through a 20x20 grid only moving right and down', problem15(20))
-    # print_answer(16, 'What is the sum of the digits of the number 2**1000', problem16())
-    # print_answer(17, 'If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?', problem17())
-    # print_answer(18, 'Find the maximum total from top to bottom of the triangle below', problem18())
-    # print_answer(18, 'Find the maximum total from top to bottom of the triangle below', problem18())
-    # print_answer(19, 'How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?', problem19())
-    # print_answer(20, 'Find the sum of the digits in the number 100! (factorial)', problem20())
-    # print_answer(21, 'Evaluate the sum of all the amicable numbers under 10000.', problem21())
-    # print_answer(22, 'What is the total of all the name scores in the file?', problem22())
-    print_answer(23, 'Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.', problem23())
-    print_answer(24, 'What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?', problem24())
-    print_answer(25, 'What is the index of the first term in the Fibonacci sequence to contain 1000 digits?', problem25())
+    print_answer(1, 'sum of multiples of three and five below one thousand')
+    print_answer(2, 'sum of even fibonacci terms where term is less than four million')
+    print_answer(3, 'highest prime factor of 600851475143')
+    print_answer(4, 'largest palindrome made from the product of two three-digit numbers')
+    print_answer(5, 'lowest number which is evenly divisible by all numbers from 1 to 20')
+    print_answer(6, 'the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum')
+    print_answer(7, 'the 10 001st prime number')
+    print_answer(8, 'value of the thirteen adjacent digits in the 1000-digit number that have the greatest product')
+    # print_answer(9, 'product of Pythagorean triplet for which a + b + c = 1000') # SLOW
+    # print_answer(10, 'sum of all primes below two million') # SLOW
+    print_answer(11, 'the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20x20 grid')
+    # print_answer(12, 'value of the first triangle number to have over five hundred divisors') # SLOW
+    print_answer(13, 'first ten digits of the sum of the 50 one-hundred digit numbers (problem13_input.txt)')
+    # print_answer(14, 'starting number, under one million, produces the longest collatz chain') # SLOW
+    print_answer(15, 'number of paths through a 20x20 grid only moving right and down')
+    print_answer(16, 'What is the sum of the digits of the number 2**1000')
+    print_answer(17, 'If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?')
+    print_answer(18, 'Find the maximum total from top to bottom of the triangle below')
+    print_answer(18, 'Find the maximum total from top to bottom of the triangle below')
+    print_answer(19, 'How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?')
+    print_answer(20, 'Find the sum of the digits in the number 100! (factorial)')
+    # print_answer(21, 'Evaluate the sum of all the amicable numbers under 10000.') # SLOW
+    print_answer(22, 'What is the total of all the name scores in the file?')
+    print_answer(23, 'Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.')
+    print_answer(24, 'What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?')
+    print_answer(25, 'What is the index of the first term in the Fibonacci sequence to contain 1000 digits?')
 
 
 
