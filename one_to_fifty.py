@@ -536,12 +536,12 @@ def problem20(number=100):
 assert problem20(number=10) == 27
 
 def get_proper_divisors(n):
-    divisors = []
+    divisors = set()
     for x in xrange(1, int(n**0.5) + 1):
         if no_remainder(n, x):
-            divisors.append(x)
+            divisors.add(x)
             if x != 1:
-                divisors.append(n / x)
+                divisors.add(n / x)
     return [ d for d in sorted(divisors) ]
 
 assert get_proper_divisors(220) == [1, 2, 4, 5, 10, 11, 20, 22, 44, 55, 110]
@@ -573,6 +573,49 @@ def problem22():
         # print name, pos, name_score, name_score * pos
     return total
 
+def problem23():
+    """
+A perfect number is a number for which the sum of its proper divisors is
+exactly equal to the number. For example, the sum of the proper divisors of 28
+would be 1 + 2 + 4 + 7 + 14 = 28, which means that 28 is a perfect number.
+
+A number n is called deficient if the sum of its proper divisors is less than n
+and it is called abundant if this sum exceeds n.
+
+As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest
+number that can be written as the sum of two abundant numbers is 24. By
+mathematical analysis, it can be shown that all integers greater than 28123 can
+be written as the sum of two abundant numbers. However, this upper limit cannot
+be reduced any further by analysis even though it is known that the greatest
+number that cannot be expressed as the sum of two abundant numbers is less than
+this limit.
+    Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
+    """
+    abundant_numbers = []
+    for i in range(1, 28123 + 1):
+    # for i in range(12, 1000):
+        divisors = get_proper_divisors(i)
+        divisor_sum = sum(divisors)
+        is_abundant = divisor_sum > i
+        if is_abundant:
+            abundant_numbers.append(i)
+            # print '%05d %150s %05d' % (i, divisors, divisor_sum)
+
+    sums = set()
+    for a in abundant_numbers:
+        for b in abundant_numbers:
+            sums.add(a + b)
+
+    total = 0
+    for i in range(1, 28123 + 1):
+        if i not in sums:
+            total += i
+    return total
+
+
+
+
+
 
 def main():
     # print_answer(1, 'sum of multiples of three and five below one thousand', problem1(1000))
@@ -597,7 +640,8 @@ def main():
     # print_answer(19, 'How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?', problem19())
     # print_answer(20, 'Find the sum of the digits in the number 100! (factorial)', problem20())
     # print_answer(21, 'Evaluate the sum of all the amicable numbers under 10000.', problem21())
-    print_answer(22, 'What is the total of all the name scores in the file?', problem22())
+    # print_answer(22, 'What is the total of all the name scores in the file?', problem22())
+    print_answer(23, 'Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.', problem23())
 
 
 
