@@ -8,6 +8,7 @@ from fractions import gcd
 from operator import mul
 
 from itertools import combinations
+from itertools import permutations
 
 def read_file(filename):
     return [ line.strip() for line in open(filename) ]
@@ -614,7 +615,10 @@ this limit.
 
 
 
-
+def problem24():
+    numbers = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+    perms = [ p for p in permutations(numbers) ]
+    return ''.join(str(n) for n in perms[1000000-1])
 
 
 def main():
@@ -641,7 +645,8 @@ def main():
     # print_answer(20, 'Find the sum of the digits in the number 100! (factorial)', problem20())
     # print_answer(21, 'Evaluate the sum of all the amicable numbers under 10000.', problem21())
     # print_answer(22, 'What is the total of all the name scores in the file?', problem22())
-    print_answer(23, 'Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.', problem23())
+    # print_answer(23, 'Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.', problem23())
+    print_answer(24, 'What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?', problem24())
 
 
 
