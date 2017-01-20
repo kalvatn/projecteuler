@@ -322,6 +322,37 @@ def problem25(limit=1000):
         # print i, term
     return i
 
+def strip_trailing_zeroes(s):
+    new_s = ''
+    end = len(s)
+    for i in range(len(s)-1, 0, -1):
+        if s[i] == '0' and s[i-1] == '0':
+            end = i
+    return s[0:end]
+
+def problem26(d=1000):
+    longest = (0, 0)
+    for i in range(1, d):
+        remainders = []
+        quotients = []
+        length = 0
+        remainder = 1
+
+        while remainder:
+            quotient, remainder = divmod(remainder, i)
+
+            # print 'quotient : %d, remainder : %d' % (quotient, remainder)
+            if remainder in remainders:
+                length = len(quotients) - remainders.index(remainder)
+                break
+            remainders.append(remainder)
+            quotients.append(quotient)
+            remainder *= 10
+        if length > longest[1]:
+            longest = (i, length)
+            # print 'new longest : 1/%d has length %d, quotients : %s' % (i, length, quotients)
+    return longest
+
 
 def print_answer(problem_number, description):
     start = time.time()
@@ -357,6 +388,7 @@ def main():
     # print_answer(23, 'Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.') # SLOW
     print_answer(24, 'What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?')
     print_answer(25, 'What is the index of the first term in the Fibonacci sequence to contain 1000 digits?')
+    print_answer(26, 'Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.')
 
 
 
