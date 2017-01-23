@@ -354,12 +354,46 @@ def problem26(d=1000):
     return longest
 
 
+def problem27():
+    prime = set()
+    not_prime = set()
+    a_limit = 1000
+    b_limit = 1001
+
+    def quadratic(n, a, b):
+        return (n**2) + (a * n) + b
+    longest = (0, 0, 0, [])
+    for a in range(-a_limit, a_limit):
+        for b in range(-b_limit, b_limit):
+            chain = []
+            n = 0
+            while True:
+                r = quadratic(n, a, b)
+                if r not in prime:
+                    if r not in not_prime:
+                        if euler.is_prime(r):
+                            prime.add(r)
+                        else:
+                            not_prime.add(r)
+                if r in prime:
+                    # print 'n=%4d, a=%3d, b=%3d = %d' % (n, a, b, r)
+                    chain.append(r)
+                else:
+                    if len(chain) > len(longest[3]):
+                        longest = (a, b, n, chain)
+                        # print 'new longest (%d) a=%3d, b=%3d : %s' % (len(chain), a, b, chain)
+                    break
+                n += 1
+    # print longest
+    return longest[0] * longest[1]
+
+
 def print_answer(problem_number, description):
     start = time.time()
     answer = globals()['problem%d' % (problem_number)]()
     elapsed = time.time() - start
 
-    print 'problem %03d ; %125s : %30s (%ds)' % (problem_number, description, answer, elapsed)
+    print 'problem %03d ; %170s : %30s (%ds)' % (problem_number, description, answer, elapsed)
 
 def main():
     print_answer(1, 'sum of multiples of three and five below one thousand')
@@ -389,6 +423,7 @@ def main():
     print_answer(24, 'What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?')
     print_answer(25, 'What is the index of the first term in the Fibonacci sequence to contain 1000 digits?')
     print_answer(26, 'Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.')
+    print_answer(27, 'Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n=0.')
 
 
 
