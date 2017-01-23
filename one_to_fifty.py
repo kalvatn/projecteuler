@@ -387,6 +387,62 @@ def problem27():
     # print longest
     return longest[0] * longest[1]
 
+def problem28(n=1001):
+    matrix = [ [ 0 for x in range(n) ] for y in range(n) ]
+
+    # util.print_number_matrix(matrix)
+    x = n // 2
+    y = n // 2
+    y_dir = 1
+    x_dir = -1
+    size = n * n
+    dy = 0
+    dx = 0
+    for i in range(1, size + 1):
+        matrix[y][x] = i
+
+        # util.print_number_matrix(matrix, digit_size=3)
+        # print
+
+        if x == y:
+            # print 'x == y'
+            x_dir *= -1
+            dx = x_dir
+            dy = 0
+        else:
+            if (x-1 + y) == n-1 and x > y > 0:
+                # print 'x-1 + y % 10 == 0'
+                dy = y_dir
+                y_dir *= -1
+                dx = 0
+            elif (x + y) == n-1 and 0 < y > x:
+                # print 'x+y % 10 == 0'
+                dy = y_dir
+                y_dir *= -1
+                dx = 0
+
+        y += dy
+        x += dx
+
+    diagonal_numbers = []
+
+    for y in range(n):
+        for x in range(n):
+            if x == y or (x+y) == n-1:
+                diagonal_numbers.append(matrix[y][x])
+
+    # util.print_number_matrix(matrix, digit_size=4)
+
+    # print 'diagonal numbers : %s ' % (diagonal_numbers)
+    # print
+    return sum(diagonal_numbers)
+
+
+
+
+
+assert problem28(n=5) == 101
+
 
 def print_answer(problem_number, description):
     start = time.time()
@@ -424,6 +480,7 @@ def main():
     print_answer(25, 'What is the index of the first term in the Fibonacci sequence to contain 1000 digits?')
     print_answer(26, 'Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.')
     print_answer(27, 'Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n=0.')
+    print_answer(28, 'What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?')
 
 
 
