@@ -53,6 +53,9 @@ def is_prime(n):
 def lowest_common_multiple(a, b):
     return a * b // gcd(a, b)
 
+def greatest_common_denominator(a, b):
+    return gcd(a, b)
+
 def no_remainder(number, divisor):
     return number % divisor == 0
 

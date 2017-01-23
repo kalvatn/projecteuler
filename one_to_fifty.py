@@ -500,6 +500,17 @@ def problem32():
                     products.add(p)
     return sum(products)
 
+def problem33():
+    dp = 1
+    np = 1
+    for i in range(1, 10):
+        for j in range(1, i):
+            for k in range(1, j):
+                if (k * 10 + i) * j == k * (i * 10 + j):
+                    np *= k
+                    dp *= j
+    dp /= euler.greatest_common_denominator(np, dp)
+    return dp
 
 
 def print_answer(problem_number, description):
@@ -543,6 +554,7 @@ def main():
     print_answer(30, 'Find the sum of all the numbers that can be written as the sum of fifth powers of their digits')
     print_answer(31, 'How many different ways can 2 pounds be made using any number of coins?')
     print_answer(32, 'Find the sum of all products whose multiplicand/multiplier/product identity can be written as a 1 through 9 pandigital.')
+    print_answer(33, 'If the product of these four fractions is given in its lowest common terms, find the value of the denominator.')
 
 
 
