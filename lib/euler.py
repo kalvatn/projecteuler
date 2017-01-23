@@ -7,6 +7,7 @@ import re
 from fractions import gcd
 
 from itertools import combinations
+from itertools import permutations
 
 
 MONTHS = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ]
@@ -16,6 +17,10 @@ def integer_combinations(numbers, number_of_vars, target_sum=None):
     if target_sum is not None:
         return [ c for c in combinations(numbers, number_of_vars) if sum(c) == target_sum ]
     return [ c for c in combinations(numbers, number_of_vars)]
+
+def permute(l, length=None):
+    return permutations(l, r=length)
+
 
 def get_proper_divisors(n):
     divisors = set()
