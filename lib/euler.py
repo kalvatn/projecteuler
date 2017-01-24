@@ -221,6 +221,13 @@ def increment_yy_mm_dd(year, month, day_of_month, week, day_of_week, day_of_year
 
     return new_year, new_month, new_day_of_month, new_week, new_day_of_week, new_day_of_year
 
+def concatenated_product(number, max_f):
+    products = []
+    for f in range(1, max_f+1):
+        products.append(number * f)
+    # print products
+    return int(''.join([ str(p) for p in products ]))
+
 if __name__ == '__main__':
     assert fibonacci(10) == [ 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
     assert collatz_sequence(13) == [13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
@@ -278,4 +285,7 @@ if __name__ == '__main__':
 
     assert get_proper_divisors(220) == [1, 2, 4, 5, 10, 11, 20, 22, 44, 55, 110]
     assert get_proper_divisors(284) == [1, 2, 4, 71, 142]
+
+    assert concatenated_product(9, 5) == 918273645
+    assert concatenated_product(192, 3) == 192384576
 

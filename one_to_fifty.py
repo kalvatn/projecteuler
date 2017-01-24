@@ -594,6 +594,32 @@ def problem37():
     # print truncatable_primes
     return sum(truncatable_primes)
 
+def problem38():
+    perms = set()
+    for p in euler.permute(range(1, 10)):
+        p_string = ''.join([ str(x) for x in p])
+        perms.add(p_string)
+    perms = [ int(p) for p in perms ]
+
+    largest_product = (0, 0, 0)
+    for i in xrange(1, 9876+1):
+        if not str(i).startswith('9'):
+            continue
+        f = 2
+        p = 0
+
+        while p <= 987654321:
+            p = euler.concatenated_product(i, f)
+            if p in perms:
+                # print i, f, p
+                if p > largest_product[2]:
+                    # print 'new largest : ', p
+                    largest_product = (i, f, p)
+
+            f+=1
+    return largest_product
+
+
 
 
 def print_answer(problem_number, description):
@@ -642,6 +668,7 @@ def main():
     # print_answer(35, 'How many circular primes are there below one million?') # SLOW
     print_answer(36, 'Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.')
     print_answer(37, 'Find the sum of the only eleven primes that are both truncatable from left to right and right to left.')
+    # print_answer(38, 'What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n > 1?') # SLOW
 
 
 
