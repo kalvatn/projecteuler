@@ -302,4 +302,7 @@ if __name__ == '__main__':
 
     assert pythagorean_triplet_sum_solutions(1000) == [(200, 375, 425)]
     assert pythagorean_triplet_sum_solutions(120) == [(20,48,52), (24,45,51), (30,40,50)]
+    # triplets = pythagorean_triplets_up_to(1000)
+    # for s in sorted(triplets.keys()):
+    #     print s, triplets[s]
 
