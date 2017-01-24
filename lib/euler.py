@@ -69,19 +69,7 @@ def is_odd(number):
     return not is_even(number)
 
 def is_palindrome(x):
-    string = str(x)
-    length = len(string)
-    if length == 1:
-        return True
-    if is_even(length):
-        middle = length / 2
-        left = string[:middle]
-        right = ''.join(reversed(string[middle:]))
-    else:
-        middle = length // 2
-        left = string[:middle]
-        right = ''.join(reversed(string[middle+1:]))
-    return left == right
+    return str(x) == ''.join(reversed(str(x)))
 
 
 def fibonacci(n):
