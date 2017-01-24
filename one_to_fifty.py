@@ -568,6 +568,31 @@ def problem36(limit=10**6):
 
 # assert problem36(limit=10**3) == 1772
 
+def problem37():
+
+    primes = set()
+    truncatable_primes = set()
+
+    i = 1
+    while len(truncatable_primes) < 11:
+        if euler.is_prime(i):
+            primes.add(i)
+        i_str = str(i)
+        if len(i_str) >= 2:
+
+            is_truncatable = True
+            for l in range(0, len(i_str)):
+                lr = i_str[l:]
+                rl = i_str[0:l+1]
+                if not int(lr) in primes or not int(rl) in primes:
+                    is_truncatable = False
+                    break
+            if is_truncatable:
+                # print i, lr, rl
+                truncatable_primes.add(i)
+        i += 1
+    # print truncatable_primes
+    return sum(truncatable_primes)
 
 
 
@@ -616,6 +641,7 @@ def main():
     print_answer(34, 'Find the sum of all numbers which are equal to the sum of the factorial of their digits.')
     # print_answer(35, 'How many circular primes are there below one million?') # SLOW
     print_answer(36, 'Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.')
+    print_answer(37, 'Find the sum of the only eleven primes that are both truncatable from left to right and right to left.')
 
 
 
