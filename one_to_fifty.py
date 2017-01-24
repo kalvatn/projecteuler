@@ -551,10 +551,23 @@ def problem35(limit=10**6):
             circular.add(prime)
 
     circular = sorted([ c for c in circular ])
-    return circular, len(circular)
+    # print circular
+    return len(circular)
 
-# assert problem35(limit=10**2) == ([2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, 97], 13)
-# assert True == False
+# assert problem35(limit=10**2) == 13
+
+def problem36(limit=10**6):
+    palindromic_base2_and_10 = set()
+    for i in range(limit):
+        if euler.is_palindrome(i):
+            binary = '{0:b}'.format(i)
+            if euler.is_palindrome(binary):
+                palindromic_base2_and_10.add((i, binary))
+    # print palindromic_base2_and_10
+    return sum([ p[0] for p in palindromic_base2_and_10])
+
+# assert problem36(limit=10**3) == 1772
+
 
 
 
@@ -569,7 +582,7 @@ def main():
     print_answer(1, 'sum of multiples of three and five below one thousand')
     print_answer(2, 'sum of even fibonacci terms where term is less than four million')
     print_answer(3, 'highest prime factor of 600851475143')
-    # print_answer(4, 'largest palindrome made from the product of two three-digit numbers') # SLOW
+    print_answer(4, 'largest palindrome made from the product of two three-digit numbers') # SLOW
     print_answer(5, 'lowest number which is evenly divisible by all numbers from 1 to 20')
     print_answer(6, 'the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum')
     print_answer(7, 'the 10 001st prime number')
@@ -601,7 +614,8 @@ def main():
     # print_answer(32, 'Find the sum of all products whose multiplicand/multiplier/product identity can be written as a 1 through 9 pandigital.') #SLOW
     print_answer(33, 'If the product of these four fractions is given in its lowest common terms, find the value of the denominator.')
     print_answer(34, 'Find the sum of all numbers which are equal to the sum of the factorial of their digits.')
-    print_answer(35, 'How many circular primes are there below one million?') # SLOW
+    # print_answer(35, 'How many circular primes are there below one million?') # SLOW
+    print_answer(36, 'Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.')
 
 
 
