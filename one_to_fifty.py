@@ -93,9 +93,8 @@ def problem8(adjacent_digits=13):
     return greatest_product
 
 def problem9(target_sum=1000):
-    for a,b,c in euler.integer_combinations(range(target_sum+1), 3, target_sum=target_sum):
-        if a**2 + b**2 == c**2:
-            return a * b * c
+    solutions = euler.pythagorean_triplet_sum_solutions(target_sum=target_sum)
+    return solutions[0], reduce(mul, solutions[0])
 
 def problem10(limit=2000000):
     total = 0
@@ -620,6 +619,10 @@ def problem38():
     return largest_product
 
 
+def problem39():
+    for i in range(1000+1):
+        pass
+
 
 
 def print_answer(problem_number, description):
@@ -638,7 +641,7 @@ def main():
     print_answer(6, 'the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum')
     print_answer(7, 'the 10 001st prime number')
     print_answer(8, 'value of the thirteen adjacent digits in the 1000-digit number that have the greatest product')
-    # print_answer(9, 'product of Pythagorean triplet for which a + b + c = 1000') # SLOW
+    print_answer(9, 'product of Pythagorean triplet for which a + b + c = 1000')
     # print_answer(10, 'sum of all primes below two million') # SLOW
     print_answer(11, 'the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20x20 grid')
     # print_answer(12, 'value of the first triangle number to have over five hundred divisors') # SLOW
@@ -669,6 +672,8 @@ def main():
     print_answer(36, 'Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.')
     print_answer(37, 'Find the sum of the only eleven primes that are both truncatable from left to right and right to left.')
     # print_answer(38, 'What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n > 1?') # SLOW
+    print_answer(39, 'For which value of p <= 1000, is the number of solutions maximised?')
+
 
 
 

@@ -228,6 +228,17 @@ def concatenated_product(number, max_f):
     # print products
     return int(''.join([ str(p) for p in products ]))
 
+def pythagorean_triplet_sum_solutions(target_sum):
+    solutions = []
+    for c in range(0, target_sum//2 +1):
+        for b in range(0, c):
+            for a in range(0, b):
+                if a + b + c == target_sum:
+                    if a**2 + b**2 == c**2:
+                        solutions.append((a,b,c))
+    solutions = [s for s in sorted(solutions)]
+    return solutions
+
 if __name__ == '__main__':
     assert fibonacci(10) == [ 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
     assert collatz_sequence(13) == [13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
@@ -288,4 +299,7 @@ if __name__ == '__main__':
 
     assert concatenated_product(9, 5) == 918273645
     assert concatenated_product(192, 3) == 192384576
+
+    assert pythagorean_triplet_sum_solutions(1000) == [(200, 375, 425)]
+    assert pythagorean_triplet_sum_solutions(120) == [(20,48,52), (24,45,51), (30,40,50)]
 
