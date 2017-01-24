@@ -512,6 +512,25 @@ def problem33():
     dp /= euler.greatest_common_denominator(np, dp)
     return dp
 
+def problem34():
+    factorials = {}
+    found = set()
+    for i in xrange(3, 10**5):
+        i_fac_sum = 0
+        for j in [ int(c) for c in reversed(str(i)) ]:
+            if j not in factorials:
+                j_fac = math.factorial(j)
+                factorials[j] = j_fac
+
+            i_fac_sum += factorials[j]
+        if i_fac_sum == i:
+            found.add(i)
+            # print i, i_fac_sum
+
+    return sum(found)
+
+problem34() == sum([ 145, 40585 ])
+
 
 def print_answer(problem_number, description):
     start = time.time()
@@ -555,6 +574,7 @@ def main():
     print_answer(31, 'How many different ways can 2 pounds be made using any number of coins?')
     # print_answer(32, 'Find the sum of all products whose multiplicand/multiplier/product identity can be written as a 1 through 9 pandigital.') #SLOW
     print_answer(33, 'If the product of these four fractions is given in its lowest common terms, find the value of the denominator.')
+    print_answer(34, 'Find the sum of all numbers which are equal to the sum of the factorial of their digits.')
 
 
 
