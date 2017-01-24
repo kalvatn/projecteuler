@@ -78,13 +78,30 @@ def fibonacci(n):
         seq.append(seq[i-1] + seq[i-2])
     return seq
 
-def collatz_sequence(n, seq=[]):
-    seq.append(n)
-    if n == 1:
-        return seq
-    if is_even(n):
-        return collatz_sequence(n/2, seq)
-    return collatz_sequence(n * 3 + 1, seq)
+def collatz(n, lookup={}):
+    seq = []
+    x = n
+
+    # print n, x, lookup[x]
+    while True:
+        # print n, seq
+        if x in lookup and lookup[x]:
+            seq = seq + lookup[x]
+            break
+        else:
+            seq.append(x)
+            if x == 1:
+                break
+            elif is_even(x):
+                x = x / 2
+            else:
+                x = x * 3 + 1
+    lookup[n] = seq
+    # print n, seq
+    return lookup[n]
+
+
+assert collatz(40) == [40, 20, 10, 5, 16, 8, 4, 2, 1 ]
 
 def binomial_coefficient(n, k):
     return math.factorial(n) // (math.factorial(k) * math.factorial(n - k))
@@ -229,19 +246,35 @@ def concatenated_product(number, max_f):
     return int(''.join([ str(p) for p in products ]))
 
 def pythagorean_triplet_sum_solutions(target_sum):
-    solutions = []
-    for c in range(0, target_sum//2 +1):
-        for b in range(0, c):
-            for a in range(0, b):
-                if a + b + c == target_sum:
-                    if a**2 + b**2 == c**2:
-                        solutions.append((a,b,c))
-    solutions = [s for s in sorted(solutions)]
-    return solutions
+    return pythagorean_triplets_up_to(target_sum)[target_sum]
+
+def pythagorean_triplets_up_to(limit):
+    import time
+    solutions = {}
+    s = 0
+    c = 5
+    while c <= limit // 2 + 1:
+        for b in range(4, c):
+            for a in range(3, b):
+                if a**2 + b**2 == c**2:
+                    s = a + b + c
+                    if s not in solutions:
+                        solutions[s] = []
+                    solutions[s].append((a,b,c))
+        c += 1
+
+    filtered = {}
+    for k in sorted(solutions.keys()):
+        if k <= limit:
+            filtered[k] = sorted(solutions[k])
+    return filtered
 
 if __name__ == '__main__':
     assert fibonacci(10) == [ 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
-    assert collatz_sequence(13) == [13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
+
+    assert collatz(13) == [13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
+    assert collatz(40) == [40, 20, 10, 5, 16, 8, 4, 2, 1 ]
+
     assert binomial_coefficient(4, 2) == 6
 
     assert len(integer_combinations([1,2], 2, target_sum=0)) == 0

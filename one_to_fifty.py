@@ -158,14 +158,22 @@ def problem13():
         total += int(line)
     return str(total)[0:10]
 
-def problem14():
+def problem14(limit=10**6):
     longest_sequence = []
-    for i in range(1, 1000000):
-        seq = euler.collatz_sequence(i, seq=[])
+
+    print 'start new'
+    start = time.time()
+    numbers = xrange(2, limit)
+    lookup = { i : [] for i in numbers }
+    for i in numbers:
+        seq = euler.collatz(i, lookup=lookup)
         if len(seq) > len(longest_sequence):
             longest_sequence = seq
             # print 'new longest %d : %d' % (seq[0], len(seq))
+    print 'end new', time.time() - start
+
     return (longest_sequence[0], len(longest_sequence))
+
 
 def problem15(grid_size=20):
     return euler.binomial_coefficient(2 * grid_size, grid_size)
