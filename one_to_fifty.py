@@ -184,7 +184,7 @@ def problem17(limit=1000):
         # print '%04d - %35s (%02d) - %5d' % (i, number_as_words, letter_count, total_letters)
     return total_letters
 
-assert problem17(limit=5) == 19
+# assert problem17(limit=5) == 19
 
 
 
@@ -250,7 +250,7 @@ def problem20(number=100):
         digit_sum += int(c)
     return digit_sum
 
-assert problem20(number=10) == 27
+# assert problem20(number=10) == 27
 
 
 
@@ -441,7 +441,7 @@ def problem28(n=1001):
 
 
 
-assert problem28(n=5) == 101
+# assert problem28(n=5) == 101
 
 
 def problem29(limit=100):
@@ -454,7 +454,7 @@ def problem29(limit=100):
     # print [ t for t in sorted(terms) ]
     return len([ t for t in sorted(terms) ])
 
-assert problem29(limit=5) == len([ 4, 8, 9, 16, 25, 27, 32, 64, 81, 125, 243, 256, 625, 1024, 3125 ])
+# assert problem29(limit=5) == len([ 4, 8, 9, 16, 25, 27, 32, 64, 81, 125, 243, 256, 625, 1024, 3125 ])
 
 
 def problem30(power=5):
@@ -469,7 +469,7 @@ def problem30(power=5):
     # print numbers
     return sum(numbers)
 
-assert problem30(power=4) == sum([ 1634, 8208, 9474 ])
+# assert problem30(power=4) == sum([ 1634, 8208, 9474 ])
 
 
 def problem31(target=200):
@@ -529,7 +529,33 @@ def problem34():
 
     return sum(found)
 
-problem34() == sum([ 145, 40585 ])
+# problem34() == sum([ 145, 40585 ])
+
+
+def problem35(limit=10**6):
+    circular = set()
+    primes = set()
+    for i in range(limit):
+        if euler.is_prime(i):
+            primes.add(i)
+    for prime in primes:
+        digits = [ int(c) for c in str(prime) ]
+        # print prime, digits
+        is_circular = True
+
+        rotations = [ int(r) for r in util.string_rotations(str(prime)) ]
+        for candidate in rotations:
+            if candidate not in primes:
+                is_circular = False
+        if is_circular:
+            circular.add(prime)
+
+    circular = sorted([ c for c in circular ])
+    return circular, len(circular)
+
+# assert problem35(limit=10**2) == ([2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, 97], 13)
+# assert True == False
+
 
 
 def print_answer(problem_number, description):
@@ -575,6 +601,8 @@ def main():
     # print_answer(32, 'Find the sum of all products whose multiplicand/multiplier/product identity can be written as a 1 through 9 pandigital.') #SLOW
     print_answer(33, 'If the product of these four fractions is given in its lowest common terms, find the value of the denominator.')
     print_answer(34, 'Find the sum of all numbers which are equal to the sum of the factorial of their digits.')
+    print_answer(35, 'How many circular primes are there below one million?') # SLOW
+
 
 
 

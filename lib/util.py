@@ -1,5 +1,16 @@
 #!/usr/bin/env python
 
+from collections import deque
+
+def string_rotations(s):
+    rotations = []
+    dq = deque(s)
+    for i in range(len(s)):
+        dq.rotate(1)
+        rotations.append(''.join([c for c in dq ]))
+    return rotations
+
+
 def read_file(filename):
     return [ line.strip() for line in open(filename) ]
 
@@ -53,3 +64,6 @@ def matrix_groups_diagonal_right_to_left(matrix, group_size=2):
                 group.append(matrix[i-k][j+k])
             groups.append(group)
     return groups
+
+if __name__ == '__main__':
+    assert string_rotations('abc') == ['cab', 'bca', 'abc']
