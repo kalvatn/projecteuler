@@ -161,8 +161,6 @@ def problem13():
 def problem14(limit=10**6):
     longest_sequence = []
 
-    print 'start new'
-    start = time.time()
     numbers = xrange(2, limit)
     lookup = { i : [] for i in numbers }
     for i in numbers:
@@ -170,8 +168,6 @@ def problem14(limit=10**6):
         if len(seq) > len(longest_sequence):
             longest_sequence = seq
             # print 'new longest %d : %d' % (seq[0], len(seq))
-    print 'end new', time.time() - start
-
     return (longest_sequence[0], len(longest_sequence))
 
 
@@ -602,29 +598,32 @@ def problem37():
     return sum(truncatable_primes)
 
 def problem38():
-    perms = set()
+    nine_digit_pandas = set()
     for p in euler.permute(range(1, 10)):
-        p_string = ''.join([ str(x) for x in p])
-        perms.add(p_string)
-    perms = [ int(p) for p in perms ]
+        nine_digit_pandas.add(int(''.join(map(str, list(p)))))
+
+    numbers_to_check = set()
+    for i in range(1, 5):
+        for p in euler.permute(range(1, 10), i):
+            numbers_to_check.add(int(''.join(map(str, list(p)))))
+    # print numbers_to_check
+    max_allowed = max(nine_digit_pandas)
+
 
     largest_product = (0, 0, 0)
-    for i in xrange(1, 9876+1):
-        if not str(i).startswith('9'):
-            continue
+    for i in numbers_to_check:
         f = 2
         p = 0
 
-        while p <= 987654321:
+        while p <= max_allowed:
             p = euler.concatenated_product(i, f)
-            if p in perms:
-                # print i, f, p
-                if p > largest_product[2]:
-                    # print 'new largest : ', p
-                    largest_product = (i, f, p)
-
+            if p > largest_product[2] and p in nine_digit_pandas:
+                # print 'new largest : ', i, f, p
+                largest_product = (i, f, p)
             f+=1
     return largest_product
+
+problem38()
 
 
 def problem39(limit=1000):
@@ -640,7 +639,7 @@ def print_answer(problem_number, description):
     answer = globals()['problem%d' % (problem_number)]()
     elapsed = time.time() - start
 
-    print 'problem %03d ; %170s : %30s (%ds)' % (problem_number, description, answer, elapsed)
+    print '%03d %170s %30s (%.2fs)' % (problem_number, description, answer, elapsed)
 
 def main():
     """
@@ -656,22 +655,21 @@ def main():
     print_answer(6, 'the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum')
     print_answer(7, 'the 10 001st prime number')
     print_answer(8, 'value of the thirteen adjacent digits in the 1000-digit number that have the greatest product')
-    print_answer(9, 'product of Pythagorean triplet for which a + b + c = 1000') # SLOW
-    print_answer(10, 'sum of all primes below two million') # SLOW
+    # print_answer(9, 'product of Pythagorean triplet for which a + b + c = 1000') # SLOW
+    # print_answer(10, 'sum of all primes below two million') # SLOW
     print_answer(11, 'the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20x20 grid')
-    print_answer(12, 'value of the first triangle number to have over five hundred divisors') # SLOW
+    # print_answer(12, 'value of the first triangle number to have over five hundred divisors') # SLOW
     print_answer(13, 'first ten digits of the sum of the 50 one-hundred digit numbers (problem13_input.txt)')
-    print_answer(14, 'starting number, under one million, produces the longest collatz chain') # VERY SLOW
+    # print_answer(14, 'starting number, under one million, produces the longest collatz chain') # VERY SLOW
     print_answer(15, 'number of paths through a 20x20 grid only moving right and down')
     print_answer(16, 'What is the sum of the digits of the number 2**1000')
     print_answer(17, 'If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?')
     print_answer(18, 'Find the maximum total from top to bottom of the triangle below')
-    print_answer(18, 'Find the maximum total from top to bottom of the triangle below')
     print_answer(19, 'How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?')
     print_answer(20, 'Find the sum of the digits in the number 100! (factorial)')
-    print_answer(21, 'Evaluate the sum of all the amicable numbers under 10000.') # EXTREMELY SLOW
+    # print_answer(21, 'Evaluate the sum of all the amicable numbers under 10000.') # EXTREMELY SLOW
     print_answer(22, 'What is the total of all the name scores in the file?')
-    print_answer(23, 'Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.') # SLOW
+    # print_answer(23, 'Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.') # SLOW
     print_answer(24, 'What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?')
     print_answer(25, 'What is the index of the first term in the Fibonacci sequence to contain 1000 digits?')
     print_answer(26, 'Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.')
@@ -680,13 +678,13 @@ def main():
     print_answer(29, 'How many distinct terms are in the sequence generated by ab for 2 <= a <= 100 and 2 <= b <= 100?')
     print_answer(30, 'Find the sum of all the numbers that can be written as the sum of fifth powers of their digits')
     print_answer(31, 'How many different ways can 2 pounds be made using any number of coins?')
-    print_answer(32, 'Find the sum of all products whose multiplicand/multiplier/product identity can be written as a 1 through 9 pandigital.') # SLOW
+    # print_answer(32, 'Find the sum of all products whose multiplicand/multiplier/product identity can be written as a 1 through 9 pandigital.') # SLOW
     print_answer(33, 'If the product of these four fractions is given in its lowest common terms, find the value of the denominator.')
     print_answer(34, 'Find the sum of all numbers which are equal to the sum of the factorial of their digits.')
-    print_answer(35, 'How many circular primes are there below one million?') # SLOW
+    # print_answer(35, 'How many circular primes are there below one million?') # SLOW
     print_answer(36, 'Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.')
-    print_answer(37, 'Find the sum of the only eleven primes that are both truncatable from left to right and right to left.') # SLOW
-    print_answer(38, 'What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n > 1?') # EXTREMELY SLOW
+    # print_answer(37, 'Find the sum of the only eleven primes that are both truncatable from left to right and right to left.') # SLOW
+    print_answer(38, 'What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n > 1?') # VERY SLOW
     print_answer(39, 'For which value of p <= 1000, is the number of solutions maximised?') # SLOW
 
 
