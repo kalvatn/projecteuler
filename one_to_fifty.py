@@ -623,8 +623,6 @@ def problem38():
             f+=1
     return largest_product
 
-problem38()
-
 
 def problem39(limit=1000):
     most_solutions = (0, 0)
@@ -633,6 +631,24 @@ def problem39(limit=1000):
         if len(solutions) > most_solutions[1]:
             most_solutions = (triplet_sum, len(solutions))
     return most_solutions
+
+
+def problem40(limit=10**6):
+    fraction = ''.join(map(str, xrange(1, limit)))
+    assert fraction.startswith('123456789101112131415161718192021')
+    assert fraction[21-1] == '5'
+    assert fraction[12-1] == '1'
+    total = 1
+    for i in [ 1, 10, 10**2, 10**3, 10**4, 10**5, 10**6 ]:
+        if i <= limit:
+            digit = int(fraction[i-1])
+            total *= digit
+            # print 'digit #%d in fraction : %d' % (i, digit)
+    return total
+
+
+# problem40(1000)
+
 
 def print_answer(problem_number, description):
     start = time.time()
@@ -686,6 +702,7 @@ def main():
     # print_answer(37, 'Find the sum of the only eleven primes that are both truncatable from left to right and right to left.') # SLOW
     print_answer(38, 'What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n > 1?') # VERY SLOW
     print_answer(39, 'For which value of p <= 1000, is the number of solutions maximised?') # SLOW
+    print_answer(40, 'If dn represents the nth digit of the fractional part, find the value of the following expression; d1 * d10 * d100 * d1000 * d10000 * d100000 * d1000000')
 
 
 
