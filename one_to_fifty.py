@@ -722,6 +722,27 @@ def problem46():
         if i not in primes and i not in sums:
             return i
 
+def problem47(consecutive=4, distinct_prime_factors=4):
+    primes = euler.prime_seq(1000)
+    seq = []
+    i = 1
+    while len(seq) < consecutive:
+        pf = 0
+        for d in euler.get_proper_divisors(i):
+            if d in primes and d not in seq:
+                pf += 1
+
+        if pf >= distinct_prime_factors:
+            seq.append(i)
+        else:
+            seq = []
+        i += 1
+    return seq
+
+
+# assert problem47(2, 2) == [ 14, 15 ]
+# assert problem47(3, 3) == [ 644, 645, 646 ]
+
 
 
 
@@ -785,7 +806,8 @@ def main():
     # print_answer(43, 'Find the sum of all 0 to 9 pandigital numbers with this property.')
     # print_answer(44, 'Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference is pentagonal and D = |Pk - Pj| is minimised; what is the value of D?')
     # print_answer(45, 'Find the next triangle number that is also pentagonal and hexagonal.')
-    print_answer(46, 'What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?')
+    # print_answer(46, 'What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?')
+    print_answer(47, 'Find the first four consecutive integers to have four distinct prime factors each. What is the first of these numbers?')
 
 
 
