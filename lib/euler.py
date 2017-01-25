@@ -85,6 +85,12 @@ def triangle_seq(n):
     # print seq
     return seq
 
+def pentagonal_seq(n):
+    seq = []
+    for i in range(1, n+1):
+        seq.append(int( i * (3*i - 1) * 0.5))
+    return seq
+
 
 def collatz(n, lookup={}):
     seq = []
@@ -348,4 +354,5 @@ if __name__ == '__main__':
     #     print s, triplets[s]
 
     assert triangle_seq(10) == [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
+    assert pentagonal_seq(10) == [ 1, 5, 12, 22, 35, 51, 70, 92, 117, 145 ]
 
