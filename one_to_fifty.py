@@ -743,6 +743,16 @@ def problem47(consecutive=4, distinct_prime_factors=4):
 # assert problem47(2, 2) == [ 14, 15 ]
 # assert problem47(3, 3) == [ 644, 645, 646 ]
 
+def problem48(n=1000):
+    total = 0
+    for i in range(1, n+1):
+        total += i ** i
+    return str(total)[-10:]
+
+
+assert problem48(10) == '0405071317'
+
+
 
 
 
@@ -807,7 +817,8 @@ def main():
     # print_answer(44, 'Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference is pentagonal and D = |Pk - Pj| is minimised; what is the value of D?')
     # print_answer(45, 'Find the next triangle number that is also pentagonal and hexagonal.')
     # print_answer(46, 'What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?')
-    print_answer(47, 'Find the first four consecutive integers to have four distinct prime factors each. What is the first of these numbers?')
+    # print_answer(47, 'Find the first four consecutive integers to have four distinct prime factors each. What is the first of these numbers?')
+    print_answer(48, 'Find the last ten digits of the series, 1**1 + 2**2 + 3**3 + ... + 1000**1000.')
 
 
 
