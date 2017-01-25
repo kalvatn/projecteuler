@@ -78,6 +78,14 @@ def fibonacci(n):
         seq.append(seq[i-1] + seq[i-2])
     return seq
 
+def triangle_seq(n):
+    seq = []
+    for i in range(1, n+1):
+        seq.append(int((0.5 * i) * (i + 1)))
+    # print seq
+    return seq
+
+
 def collatz(n, lookup={}):
     seq = []
     x = n
@@ -333,9 +341,11 @@ if __name__ == '__main__':
     assert concatenated_product(9, 5) == 918273645
     assert concatenated_product(192, 3) == 192384576
 
-    assert pythagorean_triplet_sum_solutions(1000) == [(200, 375, 425)]
-    assert pythagorean_triplet_sum_solutions(120) == [(20,48,52), (24,45,51), (30,40,50)]
+    # assert pythagorean_triplet_sum_solutions(1000) == [(200, 375, 425)]
+    # assert pythagorean_triplet_sum_solutions(120) == [(20,48,52), (24,45,51), (30,40,50)]
     # triplets = pythagorean_triplets_up_to(1000)
     # for s in sorted(triplets.keys()):
     #     print s, triplets[s]
+
+    assert triangle_seq(10) == [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
 

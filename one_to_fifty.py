@@ -659,6 +659,19 @@ def problem41():
         if euler.is_prime(i):
             return i
 
+def problem42():
+    lines = [ re.sub('"', '', line).lower() for line in sorted(util.read_file(filename='problem42_input.txt')[0].split(','))]
+
+    triangles = euler.triangle_seq(200)
+
+    count = 0
+    for name in lines:
+        name_score = sum([ (alphabet.index(c)+1) for c in name ])
+        if name_score in triangles:
+            count += 1
+            # print name, name_score, triangles.index(name_score) + 1
+    return count
+
 
 
 def print_answer(problem_number, description):
@@ -714,8 +727,8 @@ def main():
     # print_answer(38, 'What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n > 1?') # VERY SLOW
     # print_answer(39, 'For which value of p <= 1000, is the number of solutions maximised?') # SLOW
     # print_answer(40, 'If dn represents the nth digit of the fractional part, find the value of the following expression; d1 * d10 * d100 * d1000 * d10000 * d100000 * d1000000')
-
-    print_answer(41, 'What is the largest n-digit pandigital prime that exists')
+    # print_answer(41, 'What is the largest n-digit pandigital prime that exists')
+    print_answer(42, 'how many are triangle words?')
 
 
 
