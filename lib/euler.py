@@ -53,14 +53,24 @@ def is_prime(n):
     return True
 
 def prime_seq(n):
-    seq = []
-    i = 2
-    while len(seq) < n:
-        if is_prime(i):
-            seq.append(i)
-        i += 1
-    # print seq
-    return seq
+    """ list of primes with length == n """
+    return prime_seq_below(10**6)[:n]
+
+def prime_seq_below(n):
+    """ Returns  a list of primes < n """
+    sieve = [True] * n
+    for i in xrange(3,int(n**0.5)+1,2):
+        if sieve[i]:
+            sieve[i*i::2*i]=[False]*((n-i*i-1)/(2*i)+1)
+    return [2] + [i for i in xrange(3,n,2) if sieve[i]]
+    # seq = []
+    # i = 2
+    # while len(seq) < n:
+    #     if is_prime(i):
+    #         seq.append(i)
+    #     i += 1
+    # # print seq
+    # return seq
 
 def square_seq(n):
     seq = []

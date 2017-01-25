@@ -766,6 +766,26 @@ def problem49():
             if prime in perms and p2 in perms and p3 in perms:
                 return ''.join(map(str, [prime, p2, p3]))
 
+def problem50(n=10**6):
+    primes = euler.prime_seq_below(n)
+    highest = primes[-1]
+    longest = (0, 0)
+    for i in range(5):
+        x = 1
+        seq = primes[i:i+x]
+        # print i, x, seq
+        while sum(seq) <= highest and i + x < len(primes):
+            seq = primes[i:i+x]
+            if sum(seq) in primes:
+                if len(seq) > longest[1]:
+                    # print 'new longest', sum(seq), len(seq)
+                    longest = (sum(seq), len(seq))
+            x += 1
+        # print longest, seq
+    return longest
+
+
+assert problem50(100) == (41, len([ 2, 3, 5, 7, 11, 13 ]))
 
 
 
@@ -834,7 +854,8 @@ def main():
     # print_answer(46, 'What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?')
     # print_answer(47, 'Find the first four consecutive integers to have four distinct prime factors each. What is the first of these numbers?')
     # print_answer(48, 'Find the last ten digits of the series, 1**1 + 2**2 + 3**3 + ... + 1000**1000.')
-    print_answer(49, 'What 12-digit number do you form by concatenating the three terms in this sequence?')
+    # print_answer(49, 'What 12-digit number do you form by concatenating the three terms in this sequence?')
+    print_answer(50, 'Which prime, below one-million, can be written as the sum of the most consecutive primes?')
 
 
 
