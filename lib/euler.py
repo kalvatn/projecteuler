@@ -95,7 +95,7 @@ def hexagonal_seq(n):
     seq = []
     for i in range(1, n+1):
         seq.append(int(i * (2 * i - 1)))
-    print seq
+    # print seq
     return seq
 
 

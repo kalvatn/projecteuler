@@ -702,6 +702,17 @@ def problem44():
                         min_diff = d
     return min_diff
 
+def problem45():
+    tri = euler.triangle_seq(10**5)
+    pen = set(euler.pentagonal_seq(10**5))
+    hexa = set(euler.hexagonal_seq(10**5))
+    for i in range(285, len(tri)):
+        triangle = tri[i]
+        if triangle in pen and triangle in hexa:
+            return i+1
+
+
+
 def print_answer(problem_number, description):
     start = time.time()
     answer = globals()['problem%d' % (problem_number)]()
@@ -758,7 +769,8 @@ def main():
     # print_answer(41, 'What is the largest n-digit pandigital prime that exists')
     # print_answer(42, 'how many are triangle words?')
     # print_answer(43, 'Find the sum of all 0 to 9 pandigital numbers with this property.')
-    print_answer(44, 'Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference is pentagonal and D = |Pk - Pj| is minimised; what is the value of D?')
+    # print_answer(44, 'Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference is pentagonal and D = |Pk - Pj| is minimised; what is the value of D?')
+    print_answer(45, 'Find the next triangle number that is also pentagonal and hexagonal.')
 
 
 
