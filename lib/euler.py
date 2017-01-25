@@ -91,6 +91,13 @@ def pentagonal_seq(n):
         seq.append(int( i * (3*i - 1) * 0.5))
     return seq
 
+def hexagonal_seq(n):
+    seq = []
+    for i in range(1, n+1):
+        seq.append(int(i * (2 * i - 1)))
+    print seq
+    return seq
+
 
 def collatz(n, lookup={}):
     seq = []
@@ -355,4 +362,6 @@ if __name__ == '__main__':
 
     assert triangle_seq(10) == [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
     assert pentagonal_seq(10) == [ 1, 5, 12, 22, 35, 51, 70, 92, 117, 145 ]
+    assert hexagonal_seq(10) == [ 1, 6, 15, 28, 45, 66, 91, 120, 153, 190 ]
+    assert triangle_seq(285)[-1] == pentagonal_seq(165)[-1] == hexagonal_seq(143)[-1]
 
