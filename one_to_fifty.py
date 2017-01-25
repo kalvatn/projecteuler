@@ -688,7 +688,19 @@ def problem43():
             numbers.add(int(n))
     return sum(numbers)
 
-
+def problem44():
+    pentagonals = set(euler.pentagonal_seq(10000))
+    min_diff = max(pentagonals)
+    for j in pentagonals:
+        for k in pentagonals:
+            if k != j:
+                s = j + k
+                if s in pentagonals:
+                    d = abs(j - k)
+                    if d in pentagonals and d < min_diff:
+                        # print j, k, s, d
+                        min_diff = d
+    return min_diff
 
 def print_answer(problem_number, description):
     start = time.time()
@@ -745,7 +757,8 @@ def main():
     # print_answer(40, 'If dn represents the nth digit of the fractional part, find the value of the following expression; d1 * d10 * d100 * d1000 * d10000 * d100000 * d1000000')
     # print_answer(41, 'What is the largest n-digit pandigital prime that exists')
     # print_answer(42, 'how many are triangle words?')
-    print_answer(43, 'Find the sum of all 0 to 9 pandigital numbers with this property.')
+    # print_answer(43, 'Find the sum of all 0 to 9 pandigital numbers with this property.')
+    print_answer(44, 'Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference is pentagonal and D = |Pk - Pj| is minimised; what is the value of D?')
 
 
 
