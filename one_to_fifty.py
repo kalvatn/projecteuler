@@ -711,6 +711,20 @@ def problem45():
         if triangle in pen and triangle in hexa:
             return i+1
 
+def problem46():
+    squares = euler.square_seq(1000)
+    primes = euler.prime_seq(1000)
+    sums = set()
+    for square in squares:
+        for prime in primes:
+            sums.add(square + prime)
+    for i in range(3, 10**5, 2):
+        if i not in primes and i not in sums:
+            return i
+
+
+
+
 
 
 def print_answer(problem_number, description):
@@ -770,7 +784,8 @@ def main():
     # print_answer(42, 'how many are triangle words?')
     # print_answer(43, 'Find the sum of all 0 to 9 pandigital numbers with this property.')
     # print_answer(44, 'Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference is pentagonal and D = |Pk - Pj| is minimised; what is the value of D?')
-    print_answer(45, 'Find the next triangle number that is also pentagonal and hexagonal.')
+    # print_answer(45, 'Find the next triangle number that is also pentagonal and hexagonal.')
+    print_answer(46, 'What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?')
 
 
 
