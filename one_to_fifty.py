@@ -672,6 +672,22 @@ def problem42():
             # print name, name_score, triangles.index(name_score) + 1
     return count
 
+def problem43():
+    numbers = set()
+    divisors = [ 2, 3, 5, 7, 11, 13, 17 ]
+    for p in euler.permute(range(0, 10)):
+        n = ''.join(map(str, list(p)))
+        candidate = True
+        for i in range(1, len(n)-2):
+            sub = int(n[i:i+3])
+            if sub % divisors[i-1] != 0:
+                candidate = False
+                break
+        if candidate:
+            # print n
+            numbers.add(int(n))
+    return sum(numbers)
+
 
 
 def print_answer(problem_number, description):
@@ -728,7 +744,8 @@ def main():
     # print_answer(39, 'For which value of p <= 1000, is the number of solutions maximised?') # SLOW
     # print_answer(40, 'If dn represents the nth digit of the fractional part, find the value of the following expression; d1 * d10 * d100 * d1000 * d10000 * d100000 * d1000000')
     # print_answer(41, 'What is the largest n-digit pandigital prime that exists')
-    print_answer(42, 'how many are triangle words?')
+    # print_answer(42, 'how many are triangle words?')
+    print_answer(43, 'Find the sum of all 0 to 9 pandigital numbers with this property.')
 
 
 
