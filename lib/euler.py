@@ -52,6 +52,23 @@ def is_prime(n):
         i = i + 6
     return True
 
+def prime_seq(n):
+    seq = []
+    i = 2
+    while len(seq) < n:
+        if is_prime(i):
+            seq.append(i)
+        i += 1
+    # print seq
+    return seq
+
+def square_seq(n):
+    seq = []
+    for i in range(1, n+1):
+        seq.append(2 * i ** 2)
+    # print seq
+    return seq
+
 
 def lowest_common_multiple(a, b):
     return a * b // gcd(a, b)
@@ -364,4 +381,12 @@ if __name__ == '__main__':
     assert pentagonal_seq(10) == [ 1, 5, 12, 22, 35, 51, 70, 92, 117, 145 ]
     assert hexagonal_seq(10) == [ 1, 6, 15, 28, 45, 66, 91, 120, 153, 190 ]
     assert triangle_seq(285)[-1] == pentagonal_seq(165)[-1] == hexagonal_seq(143)[-1]
+
+    primes = prime_seq(10**4)
+    assert primes[0:10] == [ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 ]
+    assert primes[999] == 7919
+    assert primes[9999] == 104729
+    # assert primes[99999] == 1299709
+
+    assert square_seq(10) == [ 2, 8, 18, 32, 50, 72, 98, 128, 162, 200 ]
 
