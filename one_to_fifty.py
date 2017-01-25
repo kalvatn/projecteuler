@@ -752,6 +752,21 @@ def problem48(n=1000):
 
 assert problem48(10) == '0405071317'
 
+def problem49():
+    four_digit_primes = [ p for p in euler.prime_seq(1500) if p >= 1000 and p < 10000 ]
+    for prime in four_digit_primes:
+        if prime == 1487:
+            continue
+        p2 = prime + 3330
+        p3 = p2 + 3330
+        if p2 in four_digit_primes and p3 in four_digit_primes:
+            perms = set()
+            for p in euler.permute([ int(c) for c in str(prime) ]):
+                perms.add(int(''.join(map(str, list(p)))))
+            if prime in perms and p2 in perms and p3 in perms:
+                return ''.join(map(str, [prime, p2, p3]))
+
+
 
 
 
@@ -818,7 +833,8 @@ def main():
     # print_answer(45, 'Find the next triangle number that is also pentagonal and hexagonal.')
     # print_answer(46, 'What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?')
     # print_answer(47, 'Find the first four consecutive integers to have four distinct prime factors each. What is the first of these numbers?')
-    print_answer(48, 'Find the last ten digits of the series, 1**1 + 2**2 + 3**3 + ... + 1000**1000.')
+    # print_answer(48, 'Find the last ten digits of the series, 1**1 + 2**2 + 3**3 + ... + 1000**1000.')
+    print_answer(49, 'What 12-digit number do you form by concatenating the three terms in this sequence?')
 
 
 
