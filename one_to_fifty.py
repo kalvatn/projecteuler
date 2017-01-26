@@ -788,6 +788,48 @@ def problem50(n=10**6):
 assert problem50(100) == (41, len([ 2, 3, 5, 7, 11, 13 ]))
 
 
+def replace_index(s, index, replacement):
+    if isinstance(s, int):
+        s = str(s)
+    if isinstance(replacement, int):
+        replacement = str(replacement)
+
+    if index < 1 or index > len(s):
+        raise ValueError('index must be 1..length, was %d' % index)
+    s = list(s)
+    s[index-1] = replacement
+    return ''.join(s)
+
+assert replace_index(11, 2, 2) == '12'
+assert replace_index(56003, 1, 6) == '66003'
+assert replace_index('abc', 1, 'x') == 'xbc'
+assert replace_index('abcde', 5, 'y') == 'abcdy'
+
+def problem51(family_size=8):
+    primes = euler.prime_seq_below(10**6)
+    # primes = [ p for p in euler.prime_seq_below(10**6) if p > 56000 ]
+    # primes = [ p for p in euler.prime_seq_below(10**6) if p > 10 ]
+    for p in primes:
+        seq = set()
+        print p
+        seq.add(p)
+
+        for x in range(0, 10):
+            for i1 in range(1, len(str(p))+1):
+                r1 = int(replace_index(p, i1, x))
+                if len(str(r1)) == len(str(p)) and r1 in primes:
+                    seq.add(r1)
+        if len(seq) == family_size:
+            seq = list(sorted(seq))
+            print seq
+            # return seq
+
+
+# print problem51(6)
+# assert problem51(6) == [ 13, 23, 29, 43, 53, 73, 83 ]
+# assert problem51(7) == [ 56003, 56113, 56333, 56443, 56663, 56773, 56993 ]
+# assert True == False
+
 
 
 
@@ -855,7 +897,8 @@ def main():
     # print_answer(47, 'Find the first four consecutive integers to have four distinct prime factors each. What is the first of these numbers?')
     # print_answer(48, 'Find the last ten digits of the series, 1**1 + 2**2 + 3**3 + ... + 1000**1000.')
     # print_answer(49, 'What 12-digit number do you form by concatenating the three terms in this sequence?')
-    print_answer(50, 'Which prime, below one-million, can be written as the sum of the most consecutive primes?')
+    # print_answer(50, 'Which prime, below one-million, can be written as the sum of the most consecutive primes?')
+    print_answer(51, 'Find the smallest prime which, by replacing part of the number (not necessarily adjacent digits) with the same digit, is part of an eight prime value family.')
 
 
 
