@@ -16,6 +16,16 @@ DENARY_TO_ROMAN = {
     1000: THOUSAND,
 }
 
+ROMAN_TO_DENARY = {
+    ONE             : 1,
+    FIVE            : 5,
+    TEN             : 10,
+    FIFTY           : 50,
+    HUNDRED         : 100,
+    FIVE_HUNDRED    : 500,
+    THOUSAND        : 1000,
+}
+
 def roman(number):
     """
     https://projecteuler.net/about=roman_numerals
@@ -98,3 +108,31 @@ assert roman(4999) == 'MMMMCMXCIX'
 # print
 # for i in [ 49, 606, 999, 1606, 4999 ]:
 #     print i, roman(i)
+
+def denary(roman):
+    tmp = roman
+    tmp = roman.replace('IV', '4')
+    tmp = roman.replace('XL', '40')
+    tmp = roman.replace('CD', '400')
+
+    tmp = roman.replace('IX', '9')
+    tmp = roman.replace('XC', '90')
+    tmp = roman.replace('CM', '900')
+    thousands = roman.count('M')
+    five_hundreds = roman.count('D')
+    hundreds = roman.count('C')
+    tens = roman.count('X')
+    tmp = roman.replace(thousands * THOUSAND, str(thousands))
+    tmp = roman.replace(five_hundreds * FIVE_HUNDRED, str(five_hundreds))
+    tmp = roman.replace(hundreds * HUNDRED, str(hundreds))
+    tmp = roman.replace(tens * TEN, str(tens))
+    tmp = roman.replace(FIVE + (3*ONE), 8)
+    tmp = roman.replace(FIVE + (2*ONE), 7)
+    tmp = roman.replace(FIVE + ONE, 6)
+    tmp = roman.replace(FIVE, 5)
+
+    ones = roman.count(ONE)
+    tmp = roman.replace(ones * ONE, str(ones))
+
+    return ''.join(list(tmp))
+print denary('MMMMCMXCIX')
