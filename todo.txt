@@ -1,0 +1,49 @@
+
+estimates:
+  short   : 15-30min
+  medium  : 30-60min
+  long    : 1+ hour
+
+###  | description  | estimate (time/difficulty/optimization)
+-------------------------------------------------------------
+060  | short        | easy
+061  | long         | hard?
+062  | short        | easy
+063  | short        | easy
+064  | long         | hard?
+065  | long         | hard?
+066  | short        | easy
+067  | short        | medium (p18 cont.)
+068  | medium       | medium
+069  | short        | easy
+
+070  | short        | medium (p69 cont.)
+071  | short        | medium
+072  | short        | medium (p71 cont.)
+073  | short        | medium (p71/72 cont.)
+074  | short        | medium (p34 cont.)
+075  | short        | easy/medium
+076  | short        | easy
+077  | short        | medium/hard (p76 cont.)
+078  | short        | easy/medium
+079  | short        | easy/medium
+
+080  | short        | easy/medium
+081  | short        | medium/hard (p15 cont.)
+082  | short        | medium/hard (p81 cont.)
+083  | short        | hard (p82 cont.)
+084  | long         | easy/medium
+085  | short        | medium/hard
+086  | medium       | medium/hard
+087  | short        | easy/medium
+088  | medium       | easy/medium
+089  | medium       | easy/medium
+
+
+
+
+
+
+
+
+
