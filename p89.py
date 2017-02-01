@@ -1,9 +1,15 @@
 ONE             = 'I'
+FOUR            = 'IV'
 FIVE            = 'V'
+NINE            = 'IX'
 TEN             = 'X'
+FORTY           = 'XL'
 FIFTY           = 'L'
+NINETY          = 'XC'
 HUNDRED         = 'C'
+FOUR_HUNDRED    = 'CD'
 FIVE_HUNDRED    = 'D'
+NINE_HUNDRED    = 'CM'
 THOUSAND        = 'M'
 
 DENARY_TO_ROMAN = {
@@ -109,30 +115,47 @@ assert roman(4999) == 'MMMMCMXCIX'
 # for i in [ 49, 606, 999, 1606, 4999 ]:
 #     print i, roman(i)
 
+def count_and_remove(roman, denomination):
+    count = roman.count(denomination)
+    roman = roman.replace(denomination, '')
+    # print denomination, count, roman
+    return count, roman
 def denary(roman):
     tmp = roman
-    tmp = roman.replace('IV', '4')
-    tmp = roman.replace('XL', '40')
-    tmp = roman.replace('CD', '400')
+    fours, tmp = count_and_remove(tmp, FOUR)
+    fives, tmp = count_and_remove(tmp, FIVE)
+    nines, tmp = count_and_remove(tmp, NINE)
+    forties, tmp = count_and_remove(tmp, FORTY)
+    nineties, tmp = count_and_remove(tmp, NINETY)
+    four_hundreds, tmp = count_and_remove(tmp, FOUR_HUNDRED)
+    nine_hundreds, tmp = count_and_remove(tmp, NINE_HUNDRED)
 
-    tmp = roman.replace('IX', '9')
-    tmp = roman.replace('XC', '90')
-    tmp = roman.replace('CM', '900')
-    thousands = roman.count('M')
-    five_hundreds = roman.count('D')
-    hundreds = roman.count('C')
-    tens = roman.count('X')
-    tmp = roman.replace(thousands * THOUSAND, str(thousands))
-    tmp = roman.replace(five_hundreds * FIVE_HUNDRED, str(five_hundreds))
-    tmp = roman.replace(hundreds * HUNDRED, str(hundreds))
-    tmp = roman.replace(tens * TEN, str(tens))
-    tmp = roman.replace(FIVE + (3*ONE), 8)
-    tmp = roman.replace(FIVE + (2*ONE), 7)
-    tmp = roman.replace(FIVE + ONE, 6)
-    tmp = roman.replace(FIVE, 5)
+    total = 0
+    total += fours * 4
+    total += fives * 5
+    total += nines * 9
+    total += forties * 40
+    total += nineties * 90
+    total += four_hundreds * 400
+    total += nine_hundreds * 900
+    for k, v in DENARY_TO_ROMAN.items():
+        count, tmp = count_and_remove(tmp, v)
+        total += count * k
 
-    ones = roman.count(ONE)
-    tmp = roman.replace(ones * ONE, str(ones))
+    # print tmp, total
+    return total
+assert roman(denary('MMMMCMXCIX')) == roman(4999) == 'MMMMCMXCIX'
 
-    return ''.join(list(tmp))
-print denary('MMMMCMXCIX')
+from lib.util import read_file
+
+original_length = 0
+minimized_length = 0
+for line in read_file('p89.txt'):
+    base_ten = denary(line)
+    minimized = roman(base_ten)
+
+    original_length += len(line)
+    minimized_length += len(minimized)
+
+    print line, denary(line), minimized
+print original_length, minimized_length
