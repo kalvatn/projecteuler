@@ -144,7 +144,18 @@ def denary(roman):
 
     # print tmp, total
     return total
+assert denary('IIIIIIIIIIIIIIII') == 16
+assert denary('VIIIIIIIIIII') == 16
+assert denary('VVIIIIII') == 16
+assert denary('XIIIIII') == 16
+assert denary('VVVI') == 16
+assert denary('XVI') == 16
 assert roman(denary('MMMMCMXCIX')) == roman(4999) == 'MMMMCMXCIX'
+
+for i in range(1, 5000):
+    r = roman(i)
+    assert denary(r) == i
+
 
 from lib.util import read_file
 
@@ -153,9 +164,11 @@ minimized_length = 0
 for line in read_file('p89.txt'):
     base_ten = denary(line)
     minimized = roman(base_ten)
+    assert denary(minimized) == base_ten
 
     original_length += len(line)
     minimized_length += len(minimized)
 
-    print line, denary(line), minimized
-print original_length, minimized_length
+    # if len(line) > len(minimized):
+    #     print 'longer', line, denary(line), minimized, len(line), len(minimized)
+print original_length - minimized_length
