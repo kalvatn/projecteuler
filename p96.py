@@ -81,13 +81,16 @@ class Sudoku(object):
         current_value = cell_row[x-1]
 
         if current_value == '0':
-            if value not in self.row_missing(gy):
-                print '%s not in row missing %s' % (value, self.row_missing(gy))
-            if value not in self.col_missing(gx):
-                print '%s not in col missing %s' % (value, self.col_missing(gx))
-            tmp = list(cell_row)
-            tmp[x-1] = value
-            self.cells[n-1][y-1] = ''.join(tmp)
+            if value in self.row_missing(gy) and value in self.col_missing(gx):
+                print '%s is missing in both row(%d) and col(%d), OK' % (value, gy, gx)
+                tmp = list(cell_row)
+                tmp[x-1] = value
+                self.cells[n-1][y-1] = ''.join(tmp)
+            else:
+                if value not in self.row_missing(gy):
+                    print '%s already present in row(%d), %s' % (value, gy, self.row(gy))
+                if value not in self.col_missing(gx):
+                    print '%s already present in col(%d), %s' % (value, gx, self.col(gx))
 
     def row(self, n):
         return self.grid[n-1]
@@ -165,9 +168,10 @@ for i in range(1, 10):
     print '%d - col  %s, missing : %9s' % (i, s.col(i), s.col_missing(i))
 
 
-s.update_cell(1, 1, 1, '2')
-# print s.cell(1)
-assert s.cell(1) == ['203', '900', '001' ]
+print s.cell(1)
+s.update_cell(1, 1, 1, '4')
+print s.cell(1)
+assert s.cell(1) == ['403', '900', '001' ]
 
 print s.cell(5)
 s.update_cell(5, 1, 2, '3')
